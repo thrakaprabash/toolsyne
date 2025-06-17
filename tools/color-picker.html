@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pick and convert colors with Toolsyne's Free Color Picker. Get HEX, RGB, and approximate color names instantly.">
+    <meta name="keywords" content="color picker, hex color, rgb color, toolsyne, free color tool">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Free Color Picker">
+    <meta property="og:description" content="Use Toolsyne's Free Color Picker to select colors and get HEX, RGB, and color names. Perfect for design projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/color-picker.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Free Color Picker">
+    <meta name="twitter:description" content="Pick colors and get HEX, RGB values with Toolsyne's online Color Picker tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Free Color Picker</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 200px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .tool-content {
+            flex: 2;
+            min-width: 0;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            border-radius: 6px;
+        }
+        select, input[type="color"], input[type="button"] {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="color"] {
+            width: 120px;
+            height: 45px;
+            cursor: pointer;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            width: auto;
+            margin-right: 10px;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .color-preview {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .copy-btn {
+            margin-left: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #43a047;
+        }
+        .suggested-tools a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .suggested-tools a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            input[type="color"] {
+                width: 80px;
+                height: 40px;
+            }
+            .color-preview {
+                width: 80px;
+                height: 80px;
+            }
+            .tool-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Click the color input to pick a color.</p>
+                    <p>2. The preview box will update with your selection.</p>
+                    <p>3. View the HEX, RGB, and color name below.</p>
+                    <p>4. Use the copy buttons to copy values.</p>
+                </div>
+                <div class="tool-content">
+                    <h2>Free Color Picker</h2>
+                    <form id="colorPickerForm">
+                        <label for="colorInput">Pick a Color:</label>
+                        <input type="color" id="colorInput" value="#000000">
+                        <div id="colorPreview" class="color-preview"></div>
+                    </form>
+                    <div id="result" class="tool-result" style="display: none;">
+                        <p><strong>HEX:</strong> 
+                            <span id="hexValue">#000000</span>
+                            <button class="copy-btn" onclick="copyToClipboard('hexValue')">Copy</button>
+                        </p>
+                        <p><strong>RGB:</strong> 
+                            <span id="rgbValue">0, 0, 0</span>
+                            <button class="copy-btn" onclick="copyToClipboard('rgbValue')">Copy</button>
+                        </p>
+                        <p><strong>Approx. Color Name:</strong> <span id="colorName">Black</span></p>
+                    </div>
+                    <div class="suggested-tools">
+                        <p>Suggested Tools:</p>
+                        <a href="/tools/agecal.html">Age Calculator</a>
+                        <a href="/tools/algebra.html">Algebra Solver</a>
+                        <a href="/tools/BMIcal.html">BMI Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        const colorInput = document.getElementById('colorInput');
+        const colorPreview = document.getElementById('colorPreview');
+        const hexValue = document.getElementById('hexValue');
+        const rgbValue = document.getElementById('rgbValue');
+        const colorName = document.getElementById('colorName');
+        const resultDiv = document.getElementById('result');
+
+        function updateColor() {
+            const hex = colorInput.value;
+            colorPreview.style.backgroundColor = hex;
+
+            const r = parseInt(hex.substr(1, 2), 16);
+            const g = parseInt(hex.substr(3, 2), 16);
+            const b = parseInt(hex.substr(5, 2), 16);
+            const rgb = `${r}, ${g}, ${b}`;
+
+            hexValue.textContent = hex;
+            rgbValue.textContent = rgb;
+            colorName.textContent = getColorName(r, g, b);
+            resultDiv.style.display = 'block';
+        }
+
+        function copyToClipboard(id) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied: " + text);
+            });
+        }
+
+        function getColorName(r, g, b) {
+            // Basic approximation using predefined values
+            const colorMap = {
+                "0,0,0": "Black",
+                "255,255,255": "White",
+                "255,0,0": "Red",
+                "0,255,0": "Lime",
+                "0,0,255": "Blue",
+                "255,255,0": "Yellow",
+                "0,255,255": "Cyan",
+                "255,0,255": "Magenta",
+                "192,192,192": "Silver",
+                "128,128,128": "Gray",
+                "128,0,0": "Maroon",
+                "128,128,0": "Olive",
+                "0,128,0": "Green",
+                "128,0,128": "Purple",
+                "0,128,128": "Teal",
+                "0,0,128": "Navy"
+            };
+            const key = `${r},${g},${b}`;
+            return colorMap[key] || "Custom Color";
+        }
+
+        colorInput.addEventListener('input', updateColor);
+        updateColor(); // initial render
+    </script>
+</body>
+</html>

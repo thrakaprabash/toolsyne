@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate your GPA or convert CGPA with Toolsyne's GPA Calculator. Free tool for students to manage grades accurately.">
+  <meta name="keywords" content="gpa calculator, cgpa converter, grade calculator, toolsyne, student tools">
+  <meta name="author" content="Toolsyne">
+  <meta name="robots" content="index, follow">
+  <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:title" content="Toolsyne - GPA Calculator">
+  <meta property="og:description" content="Use Toolsyne's GPA Calculator to compute your GPA or convert CGPA effortlessly. Ideal for academic planning.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.toolsyne.com/tools/gpaCalculator.html">
+  <meta property="og:image" content="/assets/images/banner.png">
+  <meta property="og:site_name" content="Toolsyne">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Toolsyne - GPA Calculator">
+  <meta name="twitter:description" content="Calculate GPA or convert CGPA with Toolsyne's online GPA Calculator tool.">
+  <meta name="twitter:image" content="/assets/images/banner.png">
+  <title>Toolsyne - GPA Calculator</title>
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+  <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+  <style>
+    /* Base Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer {
+      background-color: #0077cc;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Tool Layout */
+    .tool-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .instructions-panel {
+      flex: 0 0 250px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .tool-main {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    /* Tab Styles */
+    .tab-container {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      cursor: pointer;
+      background-color: #f1f5f9;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tab:hover {
+      background-color: #e0e7ff;
+    }
+
+    .tab.active {
+      background-color: white;
+      border-color: #0077cc;
+      color: #0077cc;
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+      background-color: white;
+      padding: 25px;
+      border-radius: 0 8px 8px 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      max-width: 600px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .course-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f8ff;
+      border-left: 4px solid #0077cc;
+      border-radius: 4px;
+      display: none;
+    }
+
+    /* Additional Links */
+    .additional-tools {
+      margin-top: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .additional-tools h3 {
+      margin-top: 0;
+      color: #0077cc;
+    }
+
+    .additional-tools ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .additional-tools li {
+      margin-bottom: 10px;
+    }
+
+    .additional-tools a {
+      color: #0077cc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .additional-tools a:hover {
+      color: #005fa3;
+      text-decoration: underline;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .tool-wrapper {
+        flex-direction: column;
+      }
+
+      .instructions-panel {
+        flex: 1 1 100%;
+      }
+
+      .course-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-container {
+        flex-direction: column;
+      }
+
+      .tab {
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+
+      .tab-content {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+    <a href="/index.html"><h2 style="color: white;">Toolsyne</h2></a>
+    <nav class="header-nav">
+      <a href="/index.html">More Tools</a>
+      <a href="/about.html">About Us</a>
+      <a href="/contact.html">Contact Us</a>
+    </nav>
+  </div>
+
+  <div class="content">
+    <div class="tool-wrapper">
+      <div class="instructions-panel">
+        <h3>How to Use GPA Calculator</h3>
+        <ol>
+          <li>Select the number of courses you want to calculate</li>
+          <li>Enter each course name (optional)</li>
+          <li>Enter the credit hours for each course</li>
+          <li>Enter your grade (letter or percentage)</li>
+          <li>Click "Calculate GPA" to see your result</li>
+          <li>Use the CGPA converter tab to convert between scales</li>
+        </ol>
+        
+        <h3>Grading Scale Reference</h3>
+        <ul>
+          <li>A+ (97-100%) = 4.0</li>
+          <li>A (93-96%) = 4.0</li>
+          <li>A- (90-92%) = 3.7</li>
+          <li>B+ (87-89%) = 3.3</li>
+          <li>B (83-86%) = 3.0</li>
+          <li>B- (80-82%) = 2.7</li>
+          <li>C+ (77-79%) = 2.3</li>
+          <li>C (73-76%) = 2.0</li>
+          <li>C- (70-72%) = 1.7</li>
+          <li>D+ (67-69%) = 1.3</li>
+          <li>D (60-66%) = 1.0</li>
+          <li>F (Below 60%) = 0.0</li>
+        </ul>
+      </div>
+      
+      <div class="tool-main">
+        <div class="tab-container">
+          <div class="tab active" onclick="switchTab('gpa-calculator')">GPA Calculator</div>
+          <div class="tab" onclick="switchTab('cgpa-converter')">CGPA Converter</div>
+        </div>
+
+        <!-- GPA Calculator -->
+        <div id="gpa-calculator" class="tab-content active">
+          <h2>GPA Calculator</h2>
+          <form id="gpaForm" onsubmit="calculateGPA(event)">
+            <div class="form-group">
+              <label for="courseCount">Number of Courses:</label>
+              <div style="display: flex; gap: 10px;">
+                <input type="number" id="courseCount" min="1" max="10" value="3" style="flex: 1;">
+                <button type="button" onclick="renderCourseInputs()">Set Courses</button>
+              </div>
+            </div>
+            
+            <div id="courseInputs"></div>
+            
+            <div class="action-buttons">
+              <button type="button" onclick="addMoreCourses()">Add Course</button>
+              <button type="submit">Calculate GPA</button>
+            </div>
+            
+            <div id="gpaResult" class="result-box"></div>
+          </form>
+        </div>
+
+        <!-- CGPA Converter -->
+        <div id="cgpa-converter" class="tab-content">
+          <h2>CGPA Converter</h2>
+          <div class="form-group">
+            <label>Convert CGPA to GPA:</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="number" id="cgpaInput" step="0.01" min="0" placeholder="Enter CGPA" style="flex: 1;">
+              <select id="cgpaScale" style="flex: 1;">
+                <option value="4">Out of 4</option>
+                <option value="5">Out of 5</option>
+                <option value="10">Out of 10</option>
+              </select>
+              <button onclick="convertToGPA()">Convert</button>
+            </div>
+            <div id="gpaConvertedResult" class="result-box"></div>
+          </div>
+          
+          <hr>
+          
+          <div class="form-group">
+            <label>Calculate CGPA from GPA values:</label>
+            <input type="text" id="gpaList" placeholder="Enter GPAs separated by commas (e.g. 3.5, 3.7, 4.0)">
+            <button onclick="convertToCGPA()" style="margin-top: 10px;">Calculate CGPA</button>
+            <div id="cgpaResult" class="result-box"></div>
+          </div>
+        </div>
+        
+        <div class="additional-tools">
+          <h3>More Useful Tools</h3>
+          <ul>
+            <li><a href="/tools/matrixCalculator.html">Matrix Calculator</a> </li>
+            <li><a href="/tools/periodicTable.html">Periodic Table</a></li>
+            <li><a href="/tools/BMIcal.html">BMI Calculator</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 Toolsyne. All rights reserved. 
+    <a href="/privacy.html">Privacy Policy</a> | 
+    <a href="/terms.html">Terms of Service</a> | 
+    <a href="/contact.html">Contact Us</a></p>
+  </div>
+
+  <script>
+    // Initialize the calculator when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCourseInputs();
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    function renderCourseInputs() {
+      const count = parseInt(document.getElementById('courseCount').value);
+      const container = document.getElementById('courseInputs');
+      container.innerHTML = '';
+      
+      for (let i = 0; i < count; i++) {
+        container.innerHTML += `
+          <div class="course-row">
+            <div>
+              <label>Course ${i + 1} Name (optional):</label>
+              <input type="text" name="courseName${i}" placeholder="e.g., Math 101">
+            </div>
+            <div>
+              <label>Credit Hours:</label>
+              <input type="number" name="credit${i}" step="0.1" min="0.5" max="10" value="3" required>
+            </div>
+            <div>
+              <label>Grade:</label>
+              <input type="text" name="grade${i}" placeholder="A or 93" required>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function calculateGPA(event) {
+      event.preventDefault();
+      const count = parseInt(document.getElementById('courseCount').value);
+      let totalPoints = 0, totalCredits = 0;
+      const gradeMap = {
+        "A+": 4.0, "A": 4.0, "A-": 3.7,
+        "B+": 3.3, "B": 3.0, "B-": 2.7,
+        "C+": 2.3, "C": 2.0, "C-": 1.7,
+        "D+": 1.3, "D": 1.0, "F": 0.0
+      };
+
+      for (let i = 0; i < count; i++) {
+        const credit = parseFloat(document.querySelector(`[name='credit${i}']`).value);
+        const gradeStr = document.querySelector(`[name='grade${i}']`).value.trim().toUpperCase();
+
+        let gradePoint = 0;
+        if (!isNaN(parseFloat(gradeStr))) {
+          const numeric = parseFloat(gradeStr);
+          if (numeric >= 97) gradePoint = 4.0;
+          else if (numeric >= 93) gradePoint = 4.0;
+          else if (numeric >= 90) gradePoint = 3.7;
+          else if (numeric >= 87) gradePoint = 3.3;
+          else if (numeric >= 83) gradePoint = 3.0;
+          else if (numeric >= 80) gradePoint = 2.7;
+          else if (numeric >= 77) gradePoint = 2.3;
+          else if (numeric >= 73) gradePoint = 2.0;
+          else if (numeric >= 70) gradePoint = 1.7;
+          else if (numeric >= 67) gradePoint = 1.3;
+          else if (numeric >= 60) gradePoint = 1.0;
+          else gradePoint = 0.0;
+        } else {
+          gradePoint = gradeMap[gradeStr] ?? -1;
+        }
+
+        if (credit < 0.5 || credit > 10 || gradePoint < 0) {
+          document.getElementById('gpaResult').innerHTML = "Invalid input in course " + (i + 1);
+          document.getElementById('gpaResult').style.display = "block";
+          return;
+        }
+
+        totalPoints += credit * gradePoint;
+        totalCredits += credit;
+      }
+
+      const gpa = totalPoints / totalCredits;
+      document.getElementById('gpaResult').innerHTML = `Your GPA is: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
+      document.getElementById('gpaResult').style.display = "block";
+    }
+
+    function convertToGPA() {
+      const cgpaInput = document.getElementById('cgpaInput');
+      const scale = parseFloat(document.getElementById('cgpaScale').value);
+      const cgpa = parseFloat(cgpaInput.value);
+      const result = document.getElementById('gpaConvertedResult');
+
+      if (isNaN(cgpa) || cgpa < 0 || cgpa > scale) {
+        result.innerHTML = "Please enter a valid CGPA value (0 to scale value)";
+        result.style.display = "block";
+        return;
+      }
+
+      const gpa = (cgpa / scale) * 4;
+      result.innerHTML = `Converted GPA: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
+      result.style.display = "block";
+    }
+
+    function convertToCGPA() {
+      const input = document.getElementById('gpaList').value;
+      const gpas = input.split(',').map(g => parseFloat(g.trim()));
+      const result = document.getElementById('cgpaResult');
+
+      if (gpas.length === 0 || gpas.some(g => isNaN(g) || g < 0 || g > 4)) {
+        result.innerHTML = "Please enter valid GPA values (0-4.0) separated by commas";
+        result.style.display = "block";
+        return;
+      }
+
+      const sum = gpas.reduce((a, b) => a + b, 0);
+      const avg = sum / gpas.length;
+      result.innerHTML = `Calculated CGPA: <strong>${avg.toFixed(2)} / 4.0</strong>`;
+      result.style.display = "block";
+    }
+
+    function addMoreCourses() {
+      const count = parseInt(document.getElementById('courseCount').value);
+      if (count < 10) {
+        document.getElementById('courseCount').value = count + 1;
+        renderCourseInputs();
+      } else {
+        alert('Maximum 10 courses allowed.');
+      }
+    }
+  </script>
+</body>
+</html>

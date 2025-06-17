@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert between Binary and Decimal numbers easily with Toolsyne's Binary ⇄ Decimal Converter. Free and accurate online tool.">
+    <meta name="keywords" content="binary to decimal, decimal to binary, converter, toolsyne, number conversion">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Binary ⇄ Decimal Converter">
+    <meta property="og:description" content="Easily convert Binary to Decimal or Decimal to Binary using Toolsyne's free online converter tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/binaryToDecimal.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Binary ⇄ Decimal Converter">
+    <meta name="twitter:description" content="Convert between Binary and Decimal with Toolsyne's online converter tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Binary ⇄ Decimal Converter</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 200px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .tool-content {
+            flex: 2;
+            min-width: 0;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        
+        select, input[type="text"], input[type="number"], input[type="button"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .suggested-tools a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .suggested-tools a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            .tool-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Select the conversion type (Binary to Decimal or Decimal to Binary).</p>
+                    <p>2. Enter the number in the input field.</p>
+                    <p>3. Click 'Convert' to see the result.</p>
+                    <p>4. Ensure the input matches the selected format.</p>
+                </div>
+                <div class="tool-content">
+                    <h2>Binary ⇄ Decimal Converter</h2>
+                    <form id="converterForm">
+                        <label for="mode">Select Conversion Type:</label>
+                        <select name="mode" id="mode">
+                            <option value="binToDec">Binary to Decimal</option>
+                            <option value="decToBin">Decimal to Binary</option>
+                        </select>
+                        <label id="inputLabel">Enter Binary Number:</label>
+                        <input type="text" id="inputValue" pattern="[0-1]+" title="Only digits 0 and 1 are allowed in binary numbers." required placeholder="e.g. 1010">
+                        <input type="button" id="convertButton" value="Convert">
+                    </form>
+                    <div id="result" class="tool-result" style="display: none;"></div>
+                    <div class="suggested-tools">
+                        <p>Suggested Tools:</p>
+                        <a href="/tools/agecal.html">Age Calculator</a>
+                        <a href="/tools/algebra.html">Algebra Solver</a>
+                        <a href="/tools/binaryHexConverter.html">Binary ⇄ Hexadecimal Converter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        function updateInputField() {
+            const mode = document.getElementById('mode').value;
+            const inputField = document.getElementById('inputValue');
+            const inputLabel = document.getElementById('inputLabel');
+
+            if (mode === 'decToBin') {
+                inputLabel.textContent = 'Enter Decimal Number:';
+                inputField.type = 'number';
+                inputField.pattern = null;
+                inputField.title = 'Enter a non-negative integer.';
+                inputField.placeholder = 'e.g. 10';
+                inputField.min = '0';
+            } else {
+                inputLabel.textContent = 'Enter Binary Number:';
+                inputField.type = 'text';
+                inputField.pattern = '[0-1]+';
+                inputField.title = 'Only digits 0 and 1 are allowed in binary numbers.';
+                inputField.placeholder = 'e.g. 1010';
+                inputField.min = null;
+            }
+            inputField.value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function performConversion() {
+            const mode = document.getElementById('mode').value;
+            const inputValue = document.getElementById('inputValue').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('tool-error');
+
+            if (!inputValue) {
+                return;
+            }
+
+            try {
+                if (mode === 'decToBin') {
+                    if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 0) {
+                        throw new Error('Invalid decimal number. Please enter a non-negative integer.');
+                    }
+                    const decimal = parseInt(inputValue, 10);
+                    const binary = decimal.toString(2);
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>Decimal:</strong> ${decimal}</p>
+                        <p><strong>Binary:</strong> ${binary}</p>
+                    `;
+                    resultDiv.style.display = 'block';
+                } else {
+                    if (!inputValue.match(/^[0-1]+$/)) {
+                        throw new Error('Invalid binary number');
+                    }
+                    const decimal = parseInt(inputValue, 2);
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>Binary:</strong> ${inputValue}</p>
+                        <p><strong>Decimal:</strong> ${decimal}</p>
+                    `;
+                    resultDiv.style.display = 'block';
+                }
+            } catch (e) {
+                resultDiv.classList.add('tool-error');
+                resultDiv.innerHTML = `<p>${e.message}. Please correct your input.</p>`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        document.getElementById('mode').addEventListener('change', updateInputField);
+        document.getElementById('convertButton').addEventListener('click', performConversion);
+        document.getElementById('converterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            performConversion();
+        });
+
+        // Initialize input field based on default mode
+        updateInputField();
+    </script>
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="description" content="Explore the Interactive Periodic Table by Toolsyne. Click to view atomic details, filter by element type, and learn with ease.">
+    <meta name="keywords" content="Interactive Periodic Table, Chemistry Tool, Chemical Elements, Toolsyne, chemistry, industry">
+    <meta name="author" content="Toolsyne">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Toolsyne - Interactive Periodic Table">
+    <meta property="og:description" content="Visualize and explore chemical elements interactively. Discover atomic details and properties.">
+    <meta property="og:image" content="https://toolsyne.com/assets/images/banner.png">
+    <meta property="og:url" content="https://toolsyne.com/tools/periodicTable.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Periodic Table">
+    <meta name="twitter:description" content="Explore atomic structure, weights, and categories using our Interactive Periodic Table tool.">
+    <meta name="twitter:image" content="https://toolsyne.com/assets/images/banner.png">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Toolsyne - Periodic-Table</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <style>
+        /* Override or complement external styles with higher specificity */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff !important;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #0077cc !important;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        
+
+        .content {
+            padding: 20px;
+        }
+
+        a {
+            color: #0077cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .tool-container {
+            max-width: 1200px; /* Increased to accommodate full table */
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 0 12px rgba(0, 123, 255, 0.15);
+            border-radius: 12px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .tool-container h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .search-bar {
+            position: relative;
+        }
+        .search-bar input {
+            width: 250px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 6px 6px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        .search-result-item {
+            padding: 6px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        .search-result-item:hover, .search-result-item:focus {
+            background-color: #f5f5f5;
+        }
+        .category-filter {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(18, 50px); /* Adjusted to match smaller elements */
+            gap: 3px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .element {
+            border-radius: 6px;
+            padding: 3px;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 10px; /* Reduced font size to fit smaller elements */
+        }
+        .element:hover, .element:focus {
+            transform: scale(1.05);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .highlight {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.5);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .element-symbol {
+            font-weight: bold;
+            font-size: 12px; /* Reduced font size to fit smaller elements */
+            margin-top: 2px;
+        }
+        .element-number {
+            font-size: 7px; /* Reduced font size to fit smaller elements */
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+        .element-name {
+            font-size: 6px; /* Reduced font size to fit smaller elements */
+            margin-top: 1px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .element-weight {
+            font-size: 5px; /* Reduced font size to fit smaller elements */
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+        }
+        .blank {
+            visibility: hidden;
+        }
+        .element-details {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 350px;
+            width: 90%;
+        }
+        .element-details-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .element-details-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .element-details-symbol {
+            font-size: 2.5em;
+            font-weight: bold;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+        .element-details-name {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .element-details-number {
+            font-size: 1em;
+            color: #666;
+        }
+        .element-details-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 4px 0;
+        }
+        .element-details-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .element-details-value {
+            text-align: right;
+        }
+        .close-details {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: #777;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        .wikipedia-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            border-radius: 4px;
+            color: #3366cc;
+            font-size: 14px;
+        }
+        .wikipedia-link:hover {
+            background-color: #e6e6e6;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .tool-container {
+                width: 90%;
+            }
+            .periodic-table {
+                grid-template-columns: repeat(9, 35px); /* Adjusted to match smaller elements */
+            }
+            .element {
+                width: 35px;
+                height: 35px;
+            }
+            .element-symbol {
+                font-size: 10px; /* Reduced font size to fit smaller elements */
+            }
+            .element-number {
+                font-size: 6px; /* Reduced font size to fit smaller elements */
+            }
+            .element-name {
+                font-size: 5px; /* Reduced font size to fit smaller elements */
+            }
+            .search-bar input {
+                width: 200px;
+            }
+        }
+
+        /* Element category colors */
+        .alkali-metal { background-color: #ff9e80; }
+        .alkaline-earth { background-color: #ffcc80; }
+        .transition-metal { background-color: #ffecb3; }
+        .post-transition-metal { background-color: #b3e5fc; }
+        .metalloid { background-color: #a5d6a7; }
+        .nonmetal { background-color: #c8e6c9; }
+        .halogen { background-color: #b2dfdb; }
+        .noble-gas { background-color: #b39ddb; }
+        .lanthanide { background-color: #f8bbd0; }
+        .actinide { background-color: #d1c4e9; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-container">
+            <h2>Interactive Periodic Table</h2>
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search by name, symbol, or number..." autocomplete="off" aria-label="Search elements">
+                    <div class="search-results" id="searchResults" role="listbox"></div>
+                </div>
+                <select class="category-filter" id="categoryFilter" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                    <option value="alkali-metal">Alkali Metals</option>
+                    <option value="alkaline-earth">Alkaline Earth</option>
+                    <option value="transition-metal">Transition Metals</option>
+                    <option value="post-transition-metal">Post-Transition Metals</option>
+                    <option value="metalloid">Metalloids</option>
+                    <option value="nonmetal">Nonmetals</option>
+                    <option value="halogen">Halogens</option>
+                    <option value="noble-gas">Noble Gases</option>
+                    <option value="lanthanide">Lanthanides</option>
+                    <option value="actinide">Actinides</option>
+                </select>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color alkali-metal"></div> Alkali Metals</div>
+                <div class="legend-item"><div class="legend-color alkaline-earth"></div> Alkaline Earth</div>
+                <div class="legend-item"><div class="legend-color transition-metal"></div> Transition Metals</div>
+                <div class="legend-item"><div class="legend-color post-transition-metal"></div> Post-Transition</div>
+                <div class="legend-item"><div class="legend-color metalloid"></div> Metalloids</div>
+                <div class="legend-item"><div class="legend-color nonmetal"></div> Nonmetals</div>
+                <div class="legend-item"><div class="legend-color halogen"></div> Halogens</div>
+                <div class="legend-item"><div class="legend-color noble-gas"></div> Noble Gases</div>
+                <div class="legend-item"><div class="legend-color lanthanide"></div> Lanthanides</div>
+                <div class="legend-item"><div class="legend-color actinide"></div> Actinides</div>
+            </div>
+            <div class="periodic-table" id="periodicTable"></div>
+            <div class="element-details" id="elementDetails">
+                <button class="close-details" aria-label="Close details">×</button>
+                <div class="element-details-content" id="elementDetailsContent"></div>
+            </div>
+        
+            <div style="margin-top: 30px;">
+                <h3>How to Use This Tool</h3>
+                <ul>
+                    <li>🔍 <strong>Search:</strong> Type an element's name, symbol, or atomic number in the search bar.</li>
+                    <li>📂 <strong>Filter:</strong> Use the dropdown to filter elements by category (e.g., Alkali Metals, Noble Gases).</li>
+                    <li>🧪 <strong>Explore:</strong> Click any element to view detailed information like atomic weight, period, and category.</li>
+                    <li>🌐 <strong>Learn More:</strong> Click “View on Wikipedia” for in-depth chemistry information.</li>
+                </ul>
+            </div>
+            <div style="margin-top: 40px;">
+                <h3>Suggested Tools</h3>
+                <ul>
+                    <li><a href="/tools/gpaCalculator.html">🎓 GPA/CGPA Converter</a></li>
+                    <li><a href="/tools/matrixCalculator.html">🧮 Matrix Calculator</a></li>
+                    <li><a href="/tools/zodiacsigncalculator.html">🔯 Zodiac Sign Finder</a></li>
+                    <li><a href="/tools/color-picker.html">🎨 Color Picker</a></li>
+                    <li><a href="/tools/unitConverter.html">📏 Unit Converter</a></li>
+                </ul>
+            </div>
+        </div> <!-- Close .tool-container -->
+
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        const elements = [
+            { number: 1, symbol: "H", name: "Hydrogen", weight: 1.008, category: "nonmetal", x: 1, y: 1 },
+            { number: 2, symbol: "He", name: "Helium", weight: 4.0026, category: "noble-gas", x: 18, y: 1 },
+            { number: 3, symbol: "Li", name: "Lithium", weight: 6.94, category: "alkali-metal", x: 1, y: 2 },
+            { number: 4, symbol: "Be", name: "Beryllium", weight: 9.0122, category: "alkaline-earth", x: 2, y: 2 },
+            { number: 5, symbol: "B", name: "Boron", weight: 10.81, category: "metalloid", x: 13, y: 2 },
+            { number: 6, symbol: "C", name: "Carbon", weight: 12.011, category: "nonmetal", x: 14, y: 2 },
+            { number: 7, symbol: "N", name: "Nitrogen", weight: 14.007, category: "nonmetal", x: 15, y: 2 },
+            { number: 8, symbol: "O", name: "Oxygen", weight: 15.999, category: "nonmetal", x: 16, y: 2 },
+            { number: 9, symbol: "F", name: "Fluorine", weight: 18.998, category: "halogen", x: 17, y: 2 },
+            { number: 10, symbol: "Ne", name: "Neon", weight: 20.180, category: "noble-gas", x: 18, y: 2 },
+            { number: 11, symbol: "Na", name: "Sodium", weight: 22.990, category: "alkali-metal", x: 1, y: 3 },
+            { number: 12, symbol: "Mg", name: "Magnesium", weight: 24.305, category: "alkaline-earth", x: 2, y: 3 },
+            { number: 13, symbol: "Al", name: "Aluminium", weight: 26.982, category: "post-transition-metal", x: 13, y: 3 },
+            { number: 14, symbol: "Si", name: "Silicon", weight: 28.085, category: "metalloid", x: 14, y: 3 },
+            { number: 15, symbol: "P", name: "Phosphorus", weight: 30.974, category: "nonmetal", x: 15, y: 3 },
+            { number: 16, symbol: "S", name: "Sulfur", weight: 32.06, category: "nonmetal", x: 16, y: 3 },
+            { number: 17, symbol: "Cl", name: "Chlorine", weight: 35.45, category: "halogen", x: 17, y: 3 },
+            { number: 18, symbol: "Ar", name: "Argon", weight: 39.948, category: "noble-gas", x: 18, y: 3 },
+            { number: 19, symbol: "K", name: "Potassium", weight: 39.098, category: "alkali-metal", x: 1, y: 4 },
+            { number: 20, symbol: "Ca", name: "Calcium", weight: 40.078, category: "alkaline-earth", x: 2, y: 4 },
+            { number: 21, symbol: "Sc", name: "Scandium", weight: 44.956, category: "transition-metal", x: 3, y: 4 },
+            { number: 22, symbol: "Ti", name: "Titanium", weight: 47.867, category: "transition-metal", x: 4, y: 4 },
+            { number: 23, symbol: "V", name: "Vanadium", weight: 50.942, category: "transition-metal", x: 5, y: 4 },
+            { number: 24, symbol: "Cr", name: "Chromium", weight: 51.996, category: "transition-metal", x: 6, y: 4 },
+            { number: 25, symbol: "Mn", name: "Manganese", weight: 54.938, category: "transition-metal", x: 7, y: 4 },
+            { number: 26, symbol: "Fe", name: "Iron", weight: 55.845, category: "transition-metal", x: 8, y: 4 },
+            { number: 27, symbol: "Co", name: "Cobalt", weight: 58.933, category: "transition-metal", x: 9, y: 4 },
+            { number: 28, symbol: "Ni", name: "Nickel", weight: 58.693, category: "transition-metal", x: 10, y: 4 },
+            { number: 29, symbol: "Cu", name: "Copper", weight: 63.546, category: "transition-metal", x: 11, y: 4 },
+            { number: 30, symbol: "Zn", name: "Zinc", weight: 65.38, category: "transition-metal", x: 12, y: 4 },
+            { number: 31, symbol: "Ga", name: "Gallium", weight: 69.723, category: "post-transition-metal", x: 13, y: 4 },
+            { number: 32, symbol: "Ge", name: "Germanium", weight: 72.630, category: "metalloid", x: 14, y: 4 },
+            { number: 33, symbol: "As", name: "Arsenic", weight: 74.922, category: "metalloid", x: 15, y: 4 },
+            { number: 34, symbol: "Se", name: "Selenium", weight: 78.971, category: "nonmetal", x: 16, y: 4 },
+            { number: 35, symbol: "Br", name: "Bromine", weight: 79.904, category: "halogen", x: 17, y: 4 },
+            { number: 36, symbol: "Kr", name: "Krypton", weight: 83.798, category: "noble-gas", x: 18, y: 4 },
+            { number: 37, symbol: "Rb", name: "Rubidium", weight: 85.468, category: "alkali-metal", x: 1, y: 5 },
+            { number: 38, symbol: "Sr", name: "Strontium", weight: 87.62, category: "alkaline-earth", x: 2, y: 5 },
+            { number: 39, symbol: "Y", name: "Yttrium", weight: 88.906, category: "transition-metal", x: 3, y: 5 },
+            { number: 40, symbol: "Zr", name: "Zirconium", weight: 91.224, category: "transition-metal", x: 4, y: 5 },
+            { number: 41, symbol: "Nb", name: "Niobium", weight: 92.906, category: "transition-metal", x: 5, y: 5 },
+            { number: 42, symbol: "Mo", name: "Molybdenum", weight: 95.95, category: "transition-metal", x: 6, y: 5 },
+            { number: 43, symbol: "Tc", name: "Technetium", weight: 98, category: "transition-metal", x: 7, y: 5 },
+            { number: 44, symbol: "Ru", name: "Ruthenium", weight: 101.07, category: "transition-metal", x: 8, y: 5 },
+            { number: 45, symbol: "Rh", name: "Rhodium", weight: 102.91, category: "transition-metal", x: 9, y: 5 },
+            { number: 46, symbol: "Pd", name: "Palladium", weight: 106.42, category: "transition-metal", x: 10, y: 5 },
+            { number: 47, symbol: "Ag", name: "Silver", weight: 107.87, category: "transition-metal", x: 11, y: 5 },
+            { number: 48, symbol: "Cd", name: "Cadmium", weight: 112.41, category: "transition-metal", x: 12, y: 5 },
+            { number: 49, symbol: "In", name: "Indium", weight: 114.82, category: "post-transition-metal", x: 13, y: 5 },
+            { number: 50, symbol: "Sn", name: "Tin", weight: 118.71, category: "post-transition-metal", x: 14, y: 5 },
+            { number: 51, symbol: "Sb", name: "Antimony", weight: 121.76, category: "metalloid", x: 15, y: 5 },
+            { number: 52, symbol: "Te", name: "Tellurium", weight: 127.60, category: "metalloid", x: 16, y: 5 },
+            { number: 53, symbol: "I", name: "Iodine", weight: 126.90, category: "halogen", x: 17, y: 5 },
+            { number: 54, symbol: "Xe", name: "Xenon", weight: 131.29, category: "noble-gas", x: 18, y: 5 },
+            { number: 55, symbol: "Cs", name: "Caesium", weight: 132.91, category: "alkali-metal", x: 1, y: 6 },
+            { number: 56, symbol: "Ba", name: "Barium", weight: 137.33, category: "alkaline-earth", x: 2, y: 6 },
+            { number: 57, symbol: "La", name: "Lanthanum", weight: 138.91, category: "lanthanide", x: 3, y: 6 },
+            { number: 72, symbol: "Hf", name: "Hafnium", weight: 178.49, category: "transition-metal", x: 4, y: 6 },
+            { number: 73, symbol: "Ta", name: "Tantalum", weight: 180.95, category: "transition-metal", x: 5, y: 6 },
+            { number: 74, symbol: "W", name: "Tungsten", weight: 183.84, category: "transition-metal", x: 6, y: 6 },
+            { number: 75, symbol: "Re", name: "Rhenium", weight: 186.21, category: "transition-metal", x: 7, y: 6 },
+            { number: 76, symbol: "Os", name: "Osmium", weight: 190.23, category: "transition-metal", x: 8, y: 6 },
+            { number: 77, symbol: "Ir", name: "Iridium", weight: 192.22, category: "transition-metal", x: 9, y: 6 },
+            { number: 78, symbol: "Pt", name: "Platinum", weight: 195.08, category: "transition-metal", x: 10, y: 6 },
+            { number: 79, symbol: "Au", name: "Gold", weight: 196.97, category: "transition-metal", x: 11, y: 6 },
+            { number: 80, symbol: "Hg", name: "Mercury", weight: 200.59, category: "transition-metal", x: 12, y: 6 },
+            { number: 81, symbol: "Tl", name: "Thallium", weight: 204.38, category: "post-transition-metal", x: 13, y: 6 },
+            { number: 82, symbol: "Pb", name: "Lead", weight: 207.2, category: "post-transition-metal", x: 14, y: 6 },
+            { number: 83, symbol: "Bi", name: "Bismuth", weight: 208.98, category: "post-transition-metal", x: 15, y: 6 },
+            { number: 84, symbol: "Po", name: "Polonium", weight: 209, category: "post-transition-metal", x: 16, y: 6 },
+            { number: 85, symbol: "At", name: "Astatine", weight: 210, category: "halogen", x: 17, y: 6 },
+            { number: 86, symbol: "Rn", name: "Radon", weight: 222, category: "noble-gas", x: 18, y: 6 },
+            { number: 87, symbol: "Fr", name: "Francium", weight: 223, category: "alkali-metal", x: 1, y: 7 },
+            { number: 88, symbol: "Ra", name: "Radium", weight: 226, category: "alkaline-earth", x: 2, y: 7 },
+            { number: 89, symbol: "Ac", name: "Actinium", weight: 227, category: "actinide", x: 3, y: 7 },
+            { number: 104, symbol: "Rf", name: "Rutherfordium", weight: 267, category: "transition-metal", x: 4, y: 7 },
+            { number: 105, symbol: "Db", name: "Dubnium", weight: 268, category: "transition-metal", x: 5, y: 7 },
+            { number: 106, symbol: "Sg", name: "Seaborgium", weight: 269, category: "transition-metal", x: 6, y: 7 },
+            { number: 107, symbol: "Bh", name: "Bohrium", weight: 270, category: "transition-metal", x: 7, y: 7 },
+            { number: 108, symbol: "Hs", name: "Hassium", weight: 277, category: "transition-metal", x: 8, y: 7 },
+            { number: 109, symbol: "Mt", name: "Meitnerium", weight: 278, category: "transition-metal", x: 9, y: 7 },
+            { number: 110, symbol: "Ds", name: "Darmstadtium", weight: 281, category: "transition-metal", x: 10, y: 7 },
+            { number: 111, symbol: "Rg", name: "Roentgenium", weight: 282, category: "transition-metal", x: 11, y: 7 },
+            { number: 112, symbol: "Cn", name: "Copernicium", weight: 285, category: "transition-metal", x: 12, y: 7 },
+            { number: 113, symbol: "Nh", name: "Nihonium", weight: 286, category: "post-transition-metal", x: 13, y: 7 },
+            { number: 114, symbol: "Fl", name: "Flerovium", weight: 289, category: "post-transition-metal", x: 14, y: 7 },
+            { number: 115, symbol: "Mc", name: "Moscovium", weight: 290, category: "post-transition-metal", x: 15, y: 7 },
+            { number: 116, symbol: "Lv", name: "Livermorium", weight: 293, category: "post-transition-metal", x: 16, y: 7 },
+            { number: 117, symbol: "Ts", name: "Tennessine", weight: 294, category: "halogen", x: 17, y: 7 },
+            { number: 118, symbol: "Og", name: "Oganesson", weight: 294, category: "noble-gas", x: 18, y: 7 },
+            { number: 58, symbol: "Ce", name: "Cerium", weight: 140.12, category: "lanthanide", x: 4, y: 9 },
+            { number: 59, symbol: "Pr", name: "Praseodymium", weight: 140.91, category: "lanthanide", x: 5, y: 9 },
+            { number: 60, symbol: "Nd", name: "Neodymium", weight: 144.24, category: "lanthanide", x: 6, y: 9 },
+            { number: 61, symbol: "Pm", name: "Promethium", weight: 145, category: "lanthanide", x: 7, y: 9 },
+            { number: 62, symbol: "Sm", name: "Samarium", weight: 150.36, category: "lanthanide", x: 8, y: 9 },
+            { number: 63, symbol: "Eu", name: "Europium", weight: 151.96, category: "lanthanide", x: 9, y: 9 },
+            { number: 64, symbol: "Gd", name: "Gadolinium", weight: 157.25, category: "lanthanide", x: 10, y: 9 },
+            { number: 65, symbol: "Tb", name: "Terbium", weight: 158.93, category: "lanthanide", x: 11, y: 9 },
+            { number: 66, symbol: "Dy", name: "Dysprosium", weight: 162.50, category: "lanthanide", x: 12, y: 9 },
+            { number: 67, symbol: "Ho", name: "Holmium", weight: 164.93, category: "lanthanide", x: 13, y: 9 },
+            { number: 68, symbol: "Er", name: "Erbium", weight: 167.26, category: "lanthanide", x: 14, y: 9 },
+            { number: 69, symbol: "Tm", name: "Thulium", weight: 168.93, category: "lanthanide", x: 15, y: 9 },
+            { number: 70, symbol: "Yb", name: "Ytterbium", weight: 173.05, category: "lanthanide", x: 16, y: 9 },
+            { number: 71, symbol: "Lu", name: "Lutetium", weight: 174.97, category: "lanthanide", x: 17, y: 9 },
+            { number: 90, symbol: "Th", name: "Thorium", weight: 232.04, category: "actinide", x: 4, y: 10 },
+            { number: 91, symbol: "Pa", name: "Protactinium", weight: 231.04, category: "actinide", x: 5, y: 10 },
+            { number: 92, symbol: "U", name: "Uranium", weight: 238.03, category: "actinide", x: 6, y: 10 },
+            { number: 93, symbol: "Np", name: "Neptunium", weight: 237, category: "actinide", x: 7, y: 10 },
+            { number: 94, symbol: "Pu", name: "Plutonium", weight: 244, category: "actinide", x: 8, y: 10 },
+            { number: 95, symbol: "Am", name: "Americium", weight: 243, category: "actinide", x: 9, y: 10 },
+            { number: 96, symbol: "Cm", name: "Curium", weight: 247, category: "actinide", x: 10, y: 10 },
+            { number: 97, symbol: "Bk", name: "Berkelium", weight: 247, category: "actinide", x: 11, y: 10 },
+            { number: 98, symbol: "Cf", name: "Californium", weight: 251, category: "actinide", x: 12, y: 10 },
+            { number: 99, symbol: "Es", name: "Einsteinium", weight: 252, category: "actinide", x: 13, y: 10 },
+            { number: 100, symbol: "Fm", name: "Fermium", weight: 257, category: "actinide", x: 14, y: 10 },
+            { number: 101, symbol: "Md", name: "Mendelevium", weight: 258, category: "actinide", x: 15, y: 10 },
+            { number: 102, symbol: "No", name: "Nobelium", weight: 259, category: "actinide", x: 16, y: 10 },
+            { number: 103, symbol: "Lr", name: "Lawrencium", weight: 262, category: "actinide", x: 17, y: 10 }
+        ];
+
+        const gridWidth = 18;
+        const gridHeight = 10;
+        const table = document.getElementById("periodicTable");
+        const searchInput = document.getElementById("searchInput");
+        const searchResults = document.getElementById("searchResults");
+        const elementDetails = document.getElementById("elementDetails");
+        const elementDetailsContent = document.getElementById("elementDetailsContent");
+        const categoryFilter = document.getElementById("categoryFilter");
+        let debounceTimeout;
+
+        function renderTable(filteredElements = elements) {
+            table.innerHTML = "";
+            const elementSet = new Set(filteredElements.map(el => `${el.x}-${el.y}`));
+            for (let y = 1; y <= gridHeight; y++) {
+                for (let x = 1; x <= gridWidth; x++) {
+                    const el = elements.find(e => e.x === x && e.y === y);
+                    const cell = document.createElement("div");
+                    if (el && elementSet.has(`${x}-${y}`)) {
+                        cell.className = `element ${el.category}`;
+                        cell.innerHTML = `
+                            <div class="element-number">${el.number}</div>
+                            <div class="element-symbol">${el.symbol}</div>
+                            <div class="element-name">${el.name}</div>
+                            <div class="element-weight">${el.weight}</div>
+                        `;
+                        cell.setAttribute("data-name", el.name.toLowerCase());
+                        cell.setAttribute("data-symbol", el.symbol.toLowerCase());
+                        cell.setAttribute("data-number", el.number);
+                        cell.setAttribute("data-category", el.category);
+                        cell.setAttribute("tabindex", "0");
+                        cell.setAttribute("role", "button");
+                        cell.setAttribute("aria-label", `View details for ${el.name}`);
+                        cell.addEventListener("click", () => showElementDetails(el));
+                        cell.addEventListener("keydown", (e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                showElementDetails(el);
+                            }
+                        });
+                    } else {
+                        cell.className = "blank";
+                    }
+                    table.appendChild(cell);
+                }
+            }
+        }
+
+        function getWikipediaUrl(elementName) {
+            // Handle special cases where Wikipedia URL differs from element name
+            const specialCases = {
+                "Aluminium": "Aluminium",
+                "Sulfur": "Sulfur",
+                "Caesium": "Caesium",
+                "Beryllium": "Beryllium",
+                "Sodium": "Sodium",
+                "Potassium": "Potassium",
+                "Tungsten": "Tungsten"
+            };
+            
+            const name = specialCases[elementName] || elementName;
+            return `https://en.wikipedia.org/wiki/${name}`;
+        }
+
+        function showElementDetails(element) {
+            const wikipediaUrl = getWikipediaUrl(element.name);
+            
+            elementDetailsContent.innerHTML = `
+                <div class="element-details-header">
+                    <div class="element-details-symbol ${element.category}">${element.symbol}</div>
+                    <div>
+                        <div class="element-details-name">${element.name}</div>
+                        <div class="element-details-number">Atomic Number: ${element.number}</div>
+                    </div>
+                </div>
+                <div class="element-details-row">
+                    <span class="element-details-label">Atomic Weight:</span>
+                    <span class="element-details-value">${element.weight}</span>
+                </div>
+                <div class="element-details-row">
+                    <span class="element-details-label">Category:</span>
+                    <span class="element-details-value">${element.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+                </div>
+                <div class="element-details-row">
+                    <span class="element-details-label">Period:</span>
+                    <span class="element-details-value">${getPeriod(element.y)}</span>
+                </div>
+                <div class="element-details-row">
+                    <span class="element-details-label">Group:</span>
+                    <span class="element-details-value">${getGroup(element.x)}</span>
+                </div>
+                <a href="${wikipediaUrl}" target="_blank" rel="noopener noreferrer" class="wikipedia-link">
+                    View on Wikipedia
+                </a>
+            `;
+            elementDetails.style.display = "block";
+            document.querySelectorAll(".element").forEach(el => el.classList.remove("highlight"));
+            const selectedElement = document.querySelector(`.element[data-number="${element.number}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add("highlight");
+                selectedElement.focus();
+            }
+        }
+
+        function formatCategory(category) {
+            return category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        function getPeriod(y) {
+            if (y === 9) return "Lanthanide Series";
+            if (y === 10) return "Actinide Series";
+            return y;
+        }
+
+        function getGroup(x) {
+            if (x >= 3 && x <= 12) return "Transition Metals";
+            return x === 18 ? "Noble Gases" : x;
+        }
+
+        function searchElement() {
+            const query = searchInput.value.toLowerCase().trim();
+            searchResults.innerHTML = "";
+            if (query.length === 0) {
+                searchResults.style.display = "none";
+                return;
+            }
+            const results = elements.filter(el =>
+                el.name.toLowerCase().includes(query) ||
+                el.symbol.toLowerCase().includes(query) ||
+                el.number.toString().includes(query)
+            ).slice(0, 10);
+            if (results.length > 0) {
+                searchResults.innerHTML = results.map(el => `
+                    <div class="search-result-item" data-number="${el.number}" role="option" tabindex="0" aria-label="${el.name} (${el.symbol})">
+                        ${el.number}. ${el.name} (${el.symbol})
+                    </div>
+                `).join("");
+                searchResults.style.display = "block";
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item" role="option" tabindex="0">No results found</div>';
+                searchResults.style.display = "block";
+            }
+        }
+
+        function selectSearchResult(number) {
+            const element = elements.find(el => el.number === number);
+            if (element) {
+                searchInput.value = element.name;
+                searchResults.style.display = "none";
+                showElementDetails(element);
+            }
+        }
+
+        searchInput.addEventListener("input", () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(searchElement, 300);
+        });
+
+        searchResults.addEventListener("click", (e) => {
+            const item = e.target.closest(".search-result-item");
+            if (item && item.getAttribute("data-number")) {
+                const number = parseInt(item.getAttribute("data-number"));
+                selectSearchResult(number);
+            }
+        });
+
+        searchResults.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                const item = e.target.closest(".search-result-item");
+                if (item && item.getAttribute("data-number")) {
+                    const number = parseInt(item.getAttribute("data-number"));
+                    selectSearchResult(number);
+                }
+            }
+        });
+
+        categoryFilter.addEventListener("change", () => {
+            const category = categoryFilter.value;
+            const elementsToShow = category === "all" ? elements : elements.filter(el => el.category === category);
+            renderTable(elementsToShow);
+            searchInput.value = "";
+            searchResults.style.display = "none";
+            document.querySelectorAll(".element").forEach(el => el.classList.remove("highlight"));
+        });
+
+        document.querySelector(".close-details").addEventListener("click", () => {
+            elementDetails.style.display = "none";
+            document.querySelectorAll(".element").forEach(el => el.classList.remove("highlight"));
+        });
+
+        renderTable();
+    </script>
+</body>
+</html>

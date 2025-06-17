@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate advanced physics formulas with Toolsyne's Advanced Physics Formula Calculator. Covers mechanics, thermodynamics, electromagnetism, and more.">
+    <meta name="keywords" content="physics calculator, physics formulas, mechanics, thermodynamics, electromagnetism, toolsyne">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Advanced Physics Formula Calculator">
+    <meta property="og:description" content="Use Toolsyne's Advanced Physics Formula Calculator for precise calculations across mechanics, thermodynamics, electromagnetism, and modern physics.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/physics.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Advanced Physics Formula Calculator">
+    <meta name="twitter:description" content="Solve physics problems with Toolsyne's calculator, featuring 30+ formulas across various physics domains.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Advanced Physics Formula Calculator</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 250px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .instructions:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #2196F3;
+            text-align: center;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .tool-content {
+            flex: 2;
+            min-width: 0;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        select:hover {
+            border-color: #2196F3;
+        }
+        .formula-category {
+            font-weight: bold;
+            color: #2196F3;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .equation-inputs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .equation-inputs div {
+            flex: 1;
+            min-width: 120px;
+            margin-bottom: 10px;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+            transform: scale(1.05);
+        }
+        input[type="button"]:active {
+            transform: scale(0.95);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .suggested-tools {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .suggested-tools h3 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+        .suggested-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+        .suggested-tools li {
+            margin-bottom: 10px;
+        }
+        .suggested-tools a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .suggested-tools a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            .tool-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+            .equation-inputs {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .equation-inputs div {
+                min-width: 100%;
+            }
+            .suggested-tools {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Select a physics formula from the dropdown.</p>
+                    <p>2. Enter values for the required variables.</p>
+                    <p>3. Click 'Calculate' to get the result.</p>
+                    <p>4. Formulas are organized by physics category.</p>
+                    <p>5. Hover over formula names to see full equations.</p>
+                </div>
+                <div class="tool-content">
+                    <h2>Advanced Physics Calculator</h2>
+                    <form id="physicsForm">
+                        <label for="formulaSelect">Choose a formula:</label>
+                        <select id="formulaSelect" onchange="generateInputs()" title="Select from 30 physics formulas">
+                            <optgroup label="Mechanics">
+                                <option value="speed" title="v = d/t">Speed (v = d/t)</option>
+                                <option value="velocity" title="v = Δx/Δt">Velocity (v = Δx/Δt)</option>
+                                <option value="acceleration" title="a = Δv/Δt">Acceleration (a = Δv/Δt)</option>
+                                <option value="kineticEnergy" title="K = ½mv²">Kinetic Energy (K = ½mv²)</option>
+                                <option value="potentialEnergy" title="U = mgh">Gravitational PE (U = mgh)</option>
+                                <option value="momentum" title="p = mv">Momentum (p = mv)</option>
+                                <option value="force" title="F = ma">Newton's 2nd Law (F = ma)</option>
+                                <option value="work" title="W = Fdcosθ">Work (W = Fdcosθ)</option>
+                                <option value="power" title="P = W/t">Power (P = W/t)</option>
+                                <option value="pressure" title="P = F/A">Pressure (P = F/A)</option>
+                                <option value="centripetal" title="F = mv²/r">Centripetal Force (F = mv²/r)</option>
+                                <option value="torque" title="τ = rFsinθ">Torque (τ = rFsinθ)</option>
+                                <option value="springPE" title="U = ½kx²">Spring Potential Energy (U = ½kx²)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Thermodynamics">
+                                <option value="heat" title="Q = mcΔT">Heat Energy (Q = mcΔT)</option>
+                                <option value="idealGas" title="PV = nRT">Ideal Gas Law (PV = nRT)</option>
+                                <option value="efficiency" title="η = Wout/Qin">Efficiency (η = Wout/Qin)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Electromagnetism">
+                                <option value="coulombsLaw" title="F = kq₁q₂/r²">Coulomb's Law (F = kq₁q₂/r²)</option>
+                                <option value="electricField" title="E = F/q">Electric Field (E = F/q)</option>
+                                <option value="electricPotential" title="V = kq/r">Electric Potential (V = kq/r)</option>
+                                <option value="capacitance" title="C = Q/V">Capacitance (C = Q/V)</option>
+                                <option value="ohmsLaw" title="V = IR">Ohm's Law (V = IR)</option>
+                                <option value="powerElec" title="P = IV">Electrical Power (P = IV)</option>
+                                <option value="magneticForce" title="F = qvBsinθ">Magnetic Force (F = qvBsinθ)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Waves & Optics">
+                                <option value="waveSpeed" title="v = fλ">Wave Speed (v = fλ)</option>
+                                <option value="snellsLaw" title="n₁sinθ₁ = n₂sinθ₂">Snell's Law (n₁sinθ₁ = n₂sinθ₂)</option>
+                                <option value="lensFormula" title="1/f = 1/u + 1/v">Lens Formula (1/f = 1/u + 1/v)</option>
+                                <option value="doppler" title="f' = f(v±v₀)/(v∓vₛ)">Doppler Effect (f' = f(v±v₀)/(v∓vₛ))</option>
+                            </optgroup>
+                            
+                            <optgroup label="Modern Physics">
+                                <option value="energyMass" title="E = mc²">Mass-Energy (E = mc²)</option>
+                                <option value="photoelectric" title="E = hf">Photoelectric Effect (E = hf)</option>
+                                <option value="deBroglie" title="λ = h/p">de Broglie Wavelength (λ = h/p)</option>
+                            </optgroup>
+                        </select>
+
+                        <div class="equation-inputs" id="inputFields"></div>
+
+                        <input type="button" id="calculateButton" value="Calculate" onclick="calculatePhysics()">
+                    </form>
+                    <div id="result" class="tool-result">
+                        <p><strong>Formula:</strong> <span id="formulaResult"></span></p>
+                        <p><strong>Calculation:</strong> <span id="calculationSteps"></span></p>
+                        <p><strong>Result:</strong> <span id="resultValue"></span></p>
+                    </div>
+                    <div class="suggested-tools">
+                        <h3>Suggested Tools</h3>
+                        <ul>
+                            <li><a href="/tools/periodicTable.html">Interactive Periodic Table</a> - Explore chemical elements</li>
+                            <li><a href="/tools/matrixCalculator.html">Matrix Calculator</a> - Perform matrix operations</li>
+                            <li><a href="/tools/percentageCalculator.html">Percentage Calculator</a> - Calculate percentages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        const formulas = {
+            // Mechanics
+            speed: ["distance", "time"],
+            velocity: ["displacement", "time"],
+            acceleration: ["v1", "v2", "time"],
+            kineticEnergy: ["mass", "velocity"],
+            potentialEnergy: ["mass", "gravity", "height"],
+            momentum: ["mass", "velocity"],
+            force: ["mass", "acceleration"],
+            work: ["force", "distance", "angle"],
+            power: ["work", "time"],
+            pressure: ["force", "area"],
+            centripetal: ["mass", "velocity", "radius"],
+            torque: ["force", "distance", "angle"],
+            springPE: ["springConstant", "displacement"],
+            
+            // Thermodynamics
+            heat: ["mass", "specificHeat", "tempChange"],
+            idealGas: ["pressure", "volume", "moles", "temperature"],
+            efficiency: ["workOutput", "heatInput"],
+            
+            // Electromagnetism
+            coulombsLaw: ["charge1", "charge2", "distance"],
+            electricField: ["force", "testCharge"],
+            electricPotential: ["charge", "distance"],
+            capacitance: ["charge", "voltage"],
+            ohmsLaw: ["current", "resistance"],
+            powerElec: ["current", "voltage"],
+            magneticForce: ["charge", "velocity", "fieldStrength", "angle"],
+            
+            // Waves & Optics
+            waveSpeed: ["frequency", "wavelength"],
+            snellsLaw: ["n1", "angle1", "n2"],
+            lensFormula: ["objectDistance", "imageDistance"],
+            doppler: ["originalFreq", "waveSpeed", "observerSpeed", "sourceSpeed"],
+            
+            // Modern Physics
+            energyMass: ["mass"],
+            photoelectric: ["frequency"],
+            deBroglie: ["momentum"]
+        };
+
+        // Constants for calculations
+        const constants = {
+            gravity: 9.81,          // m/s² (Earth)
+            coulombConstant: 8.99e9, // N·m²/C²
+            planckConstant: 6.63e-34, // J·s
+            speedOfLight: 3e8,       // m/s
+            boltzmannConstant: 1.38e-23 // J/K
+        };
+
+        // Initialize DOM elements
+        const inputFieldsDiv = document.getElementById("inputFields");
+        const resultDiv = document.getElementById("result");
+        const formulaText = document.getElementById("formulaResult");
+        const calcStepsText = document.getElementById("calculationSteps");
+        const resultValueText = document.getElementById("resultValue");
+
+        function generateInputs() {
+            const formula = document.getElementById("formulaSelect").value;
+            inputFieldsDiv.innerHTML = "";
+            
+            formulas[formula].forEach(varName => {
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <label for="${varName}" title="${getVariableDescription(varName)}">
+                        ${formatLabel(varName)} (${getUnit(varName, formula)}):
+                    </label>
+                    <input type="number" id="${varName}" step="any" required 
+                           placeholder="${getPlaceholder(varName, formula)}"
+                           title="${getVariableDescription(varName)}">
+                `;
+                inputFieldsDiv.appendChild(div);
+            });
+            
+            // Add constant value fields where applicable
+            if (formula === "coulombsLaw") {
+                addConstantField("Coulomb's constant (k)", constants.coulombConstant, "N·m²/C²");
+            }
+            if (formula === "photoelectric" || formula === "deBroglie") {
+                addConstantField("Planck's constant (h)", constants.planckConstant, "J·s");
+            }
+            if (formula === "energyMass") {
+                addConstantField("Speed of light (c)", constants.speedOfLight, "m/s");
+            }
+            if (formula === "idealGas") {
+                addConstantField("Gas constant (R)", 8.314, "J/(mol·K)");
+            }
+        }
+
+        function addConstantField(label, value, unit) {
+            const div = document.createElement("div");
+            div.innerHTML = `
+                <label>${label}:</label>
+                <input type="text" value="${value.toExponential(2)} ${unit}" disabled style="background: #eee; color: #666;">
+            `;
+            inputFieldsDiv.appendChild(div);
+        }
+
+        function formatLabel(varName) {
+            const labels = {
+                v1: "Initial velocity",
+                v2: "Final velocity",
+                tempChange: "Temperature change",
+                workOutput: "Work output",
+                heatInput: "Heat input",
+                testCharge: "Test charge",
+                fieldStrength: "Magnetic field strength",
+                originalFreq: "Original frequency",
+                observerSpeed: "Observer speed",
+                sourceSpeed: "Source speed",
+                springConstant: "Spring constant",
+                n1: "Index of refraction (n₁)",
+                n2: "Index of refraction (n₂)",
+                angle1: "Incident angle (θ₁)",
+                objectDistance: "Object distance (u)",
+                imageDistance: "Image distance (v)"
+            };
+            return labels[varName] || varName.charAt(0).toUpperCase() + varName.slice(1);
+        }
+
+        function getVariableDescription(varName) {
+            const descriptions = {
+                distance: "Total path length traveled",
+                displacement: "Change in position (vector quantity)",
+                time: "Duration of the event",
+                mass: "Mass of the object",
+                velocity: "Speed with direction",
+                v1: "Initial speed",
+                v2: "Final speed",
+                acceleration: "Rate of change of velocity",
+                gravity: "Acceleration due to gravity",
+                height: "Vertical displacement",
+                force: "Net force applied",
+                area: "Surface area",
+                angle: "Angle between force and displacement",
+                radius: "Radius of circular path",
+                springConstant: "Spring stiffness constant",
+                specificHeat: "Heat capacity per unit mass",
+                tempChange: "Change in temperature",
+                pressure: "Force per unit area",
+                volume: "Volume of gas",
+                moles: "Amount of substance",
+                temperature: "Absolute temperature",
+                charge1: "First electric charge",
+                charge2: "Second electric charge",
+                testCharge: "Charge used to measure field",
+                current: "Electric current flow",
+                resistance: "Electrical resistance",
+                voltage: "Potential difference",
+                fieldStrength: "Magnetic field intensity",
+                frequency: "Number of wave cycles per second",
+                wavelength: "Distance between wave crests"
+            };
+            return descriptions[varName] || "";
+        }
+
+        function getUnit(varName, formula) {
+            const units = {
+                // Mechanics
+                distance: "m",
+                displacement: "m",
+                time: "s",
+                v1: "m/s",
+                v2: "m/s",
+                mass: "kg",
+                velocity: "m/s",
+                gravity: "m/s²",
+                height: "m",
+                acceleration: "m/s²",
+                force: "N",
+                work: "J",
+                power: "W",
+                area: "m²",
+                angle: "°",
+                radius: "m",
+                springConstant: "N/m",
+                
+                // Thermodynamics
+                specificHeat: "J/(kg·K)",
+                tempChange: "K",
+                pressure: "Pa",
+                volume: "m³",
+                moles: "mol",
+                temperature: "K",
+                
+                // Electromagnetism
+                charge1: "C",
+                charge2: "C",
+                testCharge: "C",
+                current: "A",
+                resistance: "Ω",
+                voltage: "V",
+                fieldStrength: "T",
+                
+                // Waves & Optics
+                frequency: "Hz",
+                wavelength: "m",
+                n1: "",
+                n2: "",
+                angle1: "°",
+                objectDistance: "m",
+                imageDistance: "m",
+                
+                // Modern Physics
+                momentum: "kg·m/s"
+            };
+            return units[varName] || "";
+        }
+
+        function getPlaceholder(varName, formula) {
+            const placeholders = {
+                // Mechanics
+                distance: 100,
+                displacement: 50,
+                time: 10,
+                v1: 5,
+                v2: 15,
+                mass: 2,
+                velocity: 10,
+                gravity: 9.81,
+                height: 5,
+                acceleration: 2,
+                force: 20,
+                work: 50,
+                power: 10,
+                area: 0.5,
+                angle: 30,
+                radius: 2,
+                springConstant: 200,
+                
+                // Thermodynamics
+                specificHeat: 4186,
+                tempChange: 10,
+                pressure: 101325,
+                volume: 0.0224,
+                moles: 1,
+                temperature: 273,
+                
+                // Electromagnetism
+                charge1: 1e-6,
+                charge2: -1e-6,
+                testCharge: 1e-6,
+                current: 0.5,
+                resistance: 100,
+                voltage: 12,
+                fieldStrength: 0.5,
+                
+                // Waves & Optics
+                frequency: 440,
+                wavelength: 0.68,
+                n1: 1.33,
+                n2: 1.5,
+                angle1: 30,
+                objectDistance: 0.2,
+                imageDistance: 0.25,
+                
+                // Modern Physics
+                momentum: 1e-24
+            };
+            return placeholders[varName] || 1;
+        }
+
+        function calculatePhysics() {
+            resultDiv.style.display = "none";
+            resultDiv.classList.remove("tool-error");
+
+            const formula = document.getElementById("formulaSelect").value;
+            try {
+                const values = {};
+                formulas[formula].forEach(v => {
+                    const input = document.getElementById(v);
+                    if (!input || input.value.trim() === "") throw `Missing ${formatLabel(v)}.`;
+                    values[v] = parseFloat(input.value);
+                    if (isNaN(values[v])) throw `Invalid number for ${formatLabel(v)}.`;
+                });
+
+                let result, formulaStr, calcSteps = "";
+
+                switch (formula) {
+                    // Mechanics
+                    case "speed":
+                        if (values.time === 0) throw "Time cannot be zero.";
+                        result = values.distance / values.time;
+                        formulaStr = "v = d/t";
+                        calcSteps = `${values.distance} m / ${values.time} s = ${result.toFixed(2)} m/s`;
+                        break;
+                        
+                    case "velocity":
+                        if (values.time === 0) throw "Time cannot be zero.";
+                        result = values.displacement / values.time;
+                        formulaStr = "v = Δx/Δt";
+                        calcSteps = `${values.displacement} m / ${values.time} s = ${result.toFixed(2)} m/s`;
+                        break;
+                        
+                    case "acceleration":
+                        if (values.time === 0) throw "Time cannot be zero.";
+                        result = (values.v2 - values.v1) / values.time;
+                        formulaStr = "a = Δv/Δt";
+                        calcSteps = `(${values.v2} - ${values.v1}) m/s / ${values.time} s = ${result.toFixed(2)} m/s²`;
+                        break;
+                        
+                    case "kineticEnergy":
+                        if (values.mass < 0 || values.velocity < 0) throw "Mass and velocity cannot be negative.";
+                        result = 0.5 * values.mass * Math.pow(values.velocity, 2);
+                        formulaStr = "K = ½mv²";
+                        calcSteps = `0.5 × ${values.mass} kg × (${values.velocity} m/s)² = ${result.toFixed(2)} J`;
+                        break;
+                        
+                    case "potentialEnergy":
+                        if (values.mass < 0 || values.gravity < 0 || values.height < 0) throw "Mass, gravity, and height cannot be negative.";
+                        result = values.mass * values.gravity * values.height;
+                        formulaStr = "U = mgh";
+                        calcSteps = `${values.mass} kg × ${values.gravity} m/s² × ${values.height} m = ${result.toFixed(2)} J`;
+                        break;
+                        
+                    case "momentum":
+                        if (values.mass < 0 || values.velocity < 0) throw "Mass and velocity cannot be negative.";
+                        result = values.mass * values.velocity;
+                        formulaStr = "p = mv";
+                        calcSteps = `${values.mass} kg × ${values.velocity} m/s = ${result.toFixed(2)} kg·m/s`;
+                        break;
+                        
+                    case "force":
+                        if (values.mass < 0 || values.acceleration < 0) throw "Mass and acceleration cannot be negative.";
+                        result = values.mass * values.acceleration;
+                        formulaStr = "F = ma";
+                        calcSteps = `${values.mass} kg × ${values.acceleration} m/s² = ${result.toFixed(2)} N`;
+                        break;
+                        
+                    case "work":
+                        if (values.force < 0 || values.distance < 0) throw "Force and distance cannot be negative.";
+                        const angleRad = values.angle * Math.PI / 180;
+                        result = values.force * values.distance * Math.cos(angleRad);
+                        formulaStr = "W = Fdcosθ";
+                        calcSteps = `${values.force} N × ${values.distance} m × cos(${values.angle}°) = ${result.toFixed(2)} J`;
+                        break;
+                        
+                    case "power":
+                        if (values.time === 0) throw "Time cannot be zero.";
+                        if (values.work < 0) throw "Work cannot be negative.";
+                        result = values.work / values.time;
+                        formulaStr = "P = W/t";
+                        calcSteps = `${values.work} J / ${values.time} s = ${result.toFixed(2)} W`;
+                        break;
+                        
+                    case "pressure":
+                        if (values.area === 0) throw "Area cannot be zero.";
+                        if (values.force < 0 || values.area < 0) throw "Force and area cannot be negative.";
+                        result = values.force / values.area;
+                        formulaStr = "P = F/A";
+                        calcSteps = `${values.force} N / ${values.area} m² = ${result.toFixed(2)} Pa`;
+                        break;
+                        
+                    case "centripetal":
+                        if (values.radius === 0) throw "Radius cannot be zero.";
+                        if (values.mass < 0 || values.velocity < 0) throw "Mass and velocity cannot be negative.";
+                        result = values.mass * Math.pow(values.velocity, 2) / values.radius;
+                        formulaStr = "F = mv²/r";
+                        calcSteps = `${values.mass} kg × (${values.velocity} m/s)² / ${values.radius} m = ${result.toFixed(2)} N`;
+                        break;
+                        
+                    case "torque":
+                        if (values.force < 0 || values.distance < 0) throw "Force and distance cannot be negative.";
+                        const torqueAngleRad = values.angle * Math.PI / 180;
+                        result = values.distance * values.force * Math.sin(torqueAngleRad);
+                        formulaStr = "τ = rFsinθ";
+                        calcSteps = `${values.distance} m × ${values.force} N × sin(${values.angle}°) = ${result.toFixed(2)} N·m`;
+                        break;
+                        
+                    case "springPE":
+                        if (values.springConstant < 0 || values.displacement < 0) throw "Spring constant and displacement cannot be negative.";
+                        result = 0.5 * values.springConstant * Math.pow(values.displacement, 2);
+                        formulaStr = "U = ½kx²";
+                        calcSteps = `0.5 × ${values.springConstant} N/m × (${values.displacement} m)² = ${result.toFixed(2)} J`;
+                        break;
+                        
+                    // Thermodynamics
+                    case "heat":
+                        if (values.mass < 0 || values.specificHeat < 0 || values.tempChange < 0) throw "Mass, specific heat, and temperature change cannot be negative.";
+                        result = values.mass * values.specificHeat * values.tempChange;
+                        formulaStr = "Q = mcΔT";
+                        calcSteps = `${values.mass} kg × ${values.specificHeat} J/(kg·K) × ${values.tempChange} K = ${result.toFixed(2)} J`;
+                        break;
+                        
+                    case "idealGas":
+                        if (values.volume === 0) throw "Volume cannot be zero.";
+                        result = values.moles * 8.314 * values.temperature / values.volume;
+                        formulaStr = "PV = nRT ⇒ P = nRT/V";
+                        calcSteps = `${values.moles} mol × 8.314 J/(mol·K) × ${values.temperature} K / ${values.volume} m³ = ${result.toFixed(2)} Pa`;
+                        break;
+                        
+                    case "efficiency":
+                        if (values.heatInput === 0) throw "Heat input cannot be zero.";
+                        if (values.workOutput < 0 || values.heatInput < 0) throw "Work output and heat input cannot be negative.";
+                        result = (values.workOutput / values.heatInput) * 100;
+                        formulaStr = "η = (Wout/Qin) × 100%";
+                        calcSteps = `(${values.workOutput} J / ${values.heatInput} J) × 100% = ${result.toFixed(2)}%`;
+                        break;
+                        
+                    // Electromagnetism
+                    case "coulombsLaw":
+                        if (values.distance === 0) throw "Distance cannot be zero.";
+                        result = constants.coulombConstant * Math.abs(values.charge1 * values.charge2) / Math.pow(values.distance, 2);
+                        formulaStr = "F = k|q₁q₂|/r²";
+                        calcSteps = `8.99×10⁹ N·m²/C² × |${values.charge1} C × ${values.charge2} C| / (${values.distance} m)² = ${result.toFixed(2)} N`;
+                        break;
+                        
+                    case "electricField":
+                        if (values.testCharge === 0) throw "Test charge cannot be zero.";
+                        result = values.force / values.testCharge;
+                        formulaStr = "E = F/q";
+                        calcSteps = `${values.force} N / ${values.testCharge} C = ${result.toFixed(2)} N/C`;
+                        break;
+                        
+                    case "electricPotential":
+                        if (values.distance === 0) throw "Distance cannot be zero.";
+                        result = constants.coulombConstant * values.charge / values.distance;
+                        formulaStr = "V = kq/r";
+                        calcSteps = `8.99×10⁹ N·m²/C² × ${values.charge} C / ${values.distance} m = ${result.toFixed(2)} V`;
+                        break;
+                        
+                    case "capacitance":
+                        if (values.voltage === 0) throw "Voltage cannot be zero.";
+                        result = values.charge / values.voltage;
+                        formulaStr = "C = Q/V";
+                        calcSteps = `${values.charge} C / ${values.voltage} V = ${result.toFixed(2)} F`;
+                        break;
+                        
+                    case "ohmsLaw":
+                        result = values.current * values.resistance;
+                        formulaStr = "V = IR";
+                        calcSteps = `${values.current} A × ${values.resistance} Ω = ${result.toFixed(2)} V`;
+                        break;
+                        
+                    case "powerElec":
+                        result = values.current * values.voltage;
+                        formulaStr = "P = IV";
+                        calcSteps = `${values.current} A × ${values.voltage} V = ${result.toFixed(2)} W`;
+                        break;
+                        
+                    case "magneticForce":
+                        if (values.charge === 0) throw "Charge cannot be zero.";
+                        const magAngleRad = values.angle * Math.PI / 180;
+                        result = values.charge * values.velocity * values.fieldStrength * Math.sin(magAngleRad);
+                        formulaStr = "F = qvBsinθ";
+                        calcSteps = `${values.charge} C × ${values.velocity} m/s × ${values.fieldStrength} T × sin(${values.angle}°) = ${result.toFixed(2)} N`;
+                        break;
+                        
+                    // Waves & Optics
+                    case "waveSpeed":
+                        result = values.frequency * values.wavelength;
+                        formulaStr = "v = fλ";
+                        calcSteps = `${values.frequency} Hz × ${values.wavelength} m = ${result.toFixed(2)} m/s`;
+                        break;
+                        
+                    case "snellsLaw":
+                        const angle1Rad = values.angle1 * Math.PI / 180;
+                        const sinAngle2 = values.n1 * Math.sin(angle1Rad) / values.n2;
+                        if (Math.abs(sinAngle2) > 1) throw "Total internal reflection occurs.";
+                        result = Math.asin(sinAngle2) * 180 / Math.PI;
+                        formulaStr = "n₁sinθ₁ = n₂sinθ₂";
+                        calcSteps = `θ₂ = sin⁻¹(${values.n1} × sin(${values.angle1}°) / ${values.n2}) = ${result.toFixed(2)}°`;
+                        break;
+                        
+                    case "lensFormula":
+                        if (values.objectDistance === 0 || values.imageDistance === 0) throw "Distances cannot be zero.";
+                        result = 1 / ((1 / values.objectDistance) + (1 / values.imageDistance));
+                        formulaStr = "1/f = 1/u + 1/v";
+                        calcSteps = `1 / (1/${values.objectDistance} m + 1/${values.imageDistance} m) = ${result.toFixed(2)} m`;
+                        break;
+                        
+                    case "doppler":
+                        const numerator = constants.speedOfLight + values.observerSpeed;
+                        const denominator = constants.speedOfLight - values.sourceSpeed;
+                        if (denominator === 0) throw "Source speed cannot equal speed of light.";
+                        result = values.originalFreq * (numerator / denominator);
+                        formulaStr = "f' = f(v±v₀)/(v∓vₛ)";
+                        calcSteps = `${values.originalFreq} Hz × (${constants.speedOfLight} + ${values.observerSpeed}) / (${constants.speedOfLight} - ${values.sourceSpeed}) = ${result.toFixed(2)} Hz`;
+                        break;
+                        
+                    // Modern Physics
+                    case "energyMass":
+                        if (values.mass < 0) throw "Mass cannot be negative.";
+                        result = values.mass * Math.pow(constants.speedOfLight, 2);
+                        formulaStr = "E = mc²";
+                        calcSteps = `${values.mass} kg × (${constants.speedOfLight} m/s)² = ${result.toExponential(2)} J`;
+                        break;
+                        
+                    case "photoelectric":
+                        result = constants.planckConstant * values.frequency;
+                        formulaStr = "E = hf";
+                        calcSteps = `6.63×10⁻³⁴ J·s × ${values.frequency} Hz = ${result.toExponential(2)} J`;
+                        break;
+                        
+                    case "deBroglie":
+                        if (values.momentum === 0) throw "Momentum cannot be zero.";
+                        result = constants.planckConstant / values.momentum;
+                        formulaStr = "λ = h/p";
+                        calcSteps = `6.63×10⁻³⁴ J·s / ${values.momentum} kg·m/s = ${result.toExponential(2)} m`;
+                        break;
+                }
+
+                formulaText.innerHTML = `<strong>${formulaStr}</strong>`;
+                calcStepsText.innerHTML = `<em>Steps:</em> ${calcSteps}`;
+                resultValueText.innerHTML = `<strong>${result.toExponential(4)} ${getUnitForResult(formula)}</strong>`;
+                resultDiv.style.display = "block";
+            } catch (error) {
+                resultDiv.classList.add("tool-error");
+                resultDiv.innerHTML = `<p>Error: ${error}</p>`;
+                resultDiv.style.display = "block";
+            }
+        }
+
+        function getUnitForResult(formula) {
+            const units = {
+                // Mechanics
+                speed: "m/s",
+                velocity: "m/s",
+                acceleration: "m/s²",
+                kineticEnergy: "J",
+                potentialEnergy: "J",
+                momentum: "kg·m/s",
+                force: "N",
+                work: "J",
+                power: "W",
+                pressure: "Pa",
+                centripetal: "N",
+                torque: "N·m",
+                springPE: "J",
+                
+                // Thermodynamics
+                heat: "J",
+                idealGas: "Pa",
+                efficiency: "%",
+                
+                // Electromagnetism
+                coulombsLaw: "N",
+                electricField: "N/C or V/m",
+                electricPotential: "V",
+                capacitance: "F",
+                ohmsLaw: "V",
+                powerElec: "W",
+                magneticForce: "N",
+                
+                // Waves & Optics
+                waveSpeed: "m/s",
+                snellsLaw: "°",
+                lensFormula: "m",
+                doppler: "Hz",
+                
+                // Modern Physics
+                energyMass: "J",
+                photoelectric: "J",
+                deBroglie: "m"
+            };
+            return units[formula] || "";
+        }
+
+        // Initialize on load
+        document.getElementById("formulaSelect").addEventListener("change", generateInputs);
+        window.addEventListener("DOMContentLoaded", generateInputs);
+    </script>
+</body>
+</html>

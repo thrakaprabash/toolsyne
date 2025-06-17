@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate percentages easily with Toolsyne's Percentage Calculator. Supports percentage of, what percentage is, and percentage change.">
+    <meta name="keywords" content="percentage calculator, percent of, percentage change, toolsyne, math tools">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Percentage Calculator">
+    <meta property="og:description" content="Use Toolsyne's Percentage Calculator for quick calculations like percentage of a number, what percentage is, and percentage change.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/percentageCalculator.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Percentage Calculator">
+    <meta name="twitter:description" content="Calculate percentages including percent of, what percentage is, and percentage change with Toolsyne's online tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Percentage Calculator</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            flex: 1;
+            min-width: 300px;
+        }
+        .instructions-panel {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .instructions-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .instructions-panel h3 {
+            color: #0077cc;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+        .instructions-panel ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .instructions-panel ol li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+        .instructions-panel ol li:before {
+            content: "•";
+            color: #0077cc;
+            position: absolute;
+            left: -10px;
+            font-weight: bold;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        select, input[type="number"], input[type="button"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            width: auto;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+            transform: scale(1.05);
+        }
+        input[type="button"]:active {
+            transform: scale(0.95);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .suggested-tools {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .suggested-tools h3 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+        .suggested-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+        .suggested-tools li {
+            margin-bottom: 10px;
+        }
+        .suggested-tools a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .suggested-tools a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 768px) {
+            .tool-wrapper {
+                flex-direction: column;
+            }
+            .instructions-panel {
+                flex: 1 1 100%;
+            }
+            .tool-container {
+                max-width: 100%;
+            }
+            .instructions-panel h3 {
+                font-size: 1.1rem;
+            }
+            .instructions-panel ol {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="instructions-panel">
+                <h3>How to Use Percentage Calculator</h3>
+                <ol>
+                    <li>Select the calculation type (Percentage of a Number, What Percentage Is, or Percentage Change) from the dropdown.</li>
+                    <li>Enter the required values in the input fields based on the selected type.</li>
+                    <li>Click the 'Calculate' button to see the result.</li>
+                    <li>Check the result section for the calculated percentage.</li>
+                </ol>
+            </div>
+            <div class="tool-container">
+                <h2>Percentage Calculator</h2>
+                <form id="calculatorForm">
+                    <label for="calcType">Select Calculation Type:</label>
+                    <select name="calcType" id="calcType">
+                        <option value="percentOf">Percentage of a Number</option>
+                        <option value="percentIs">What Percentage Is</option>
+                        <option value="percentChange">Percentage Change</option>
+                    </select>
+                    <div id="inputFields">
+                        <label id="label1">Enter Percentage (%):</label>
+                        <input type="number" id="input1" step="any" min="0" required placeholder="e.g., 20">
+                        <label id="label2">Enter Number:</label>
+                        <input type="number" id="input2" step="any" required placeholder="e.g., 50">
+                    </div>
+                    <input type="button" id="calculateButton" value="Calculate">
+                </form>
+                <div id="result" class="tool-result" style="display: none;"></div>
+                <div class="suggested-tools">
+                    <h3>Suggested Tools</h3>
+                    <ul>
+                        <li><a href="/tools/lcm-gcd-calculator.html">LCM & GCD Calculator</a> - Calculate LCM and GCD of numbers</li>
+                        <li><a href="/tools/matrixCalculator.html">Matrix Calculator</a> - Perform matrix operations</li>
+                        <li><a href="/tools/investorCalc.html">Investor Calculator</a> - Estimate investment returns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        function updateInputFields() {
+            const calcType = document.getElementById('calcType').value;
+            const inputFields = document.getElementById('inputFields');
+            const label1 = document.getElementById('label1');
+            const input1 = document.getElementById('input1');
+            const label2 = document.getElementById('label2');
+            const input2 = document.getElementById('input2');
+
+            if (calcType === 'percentOf') {
+                label1.textContent = 'Enter Percentage (%):';
+                input1.placeholder = 'e.g., 20';
+                input1.min = '0';
+                label2.textContent = 'Enter Number:';
+                input2.placeholder = 'e.g., 50';
+                input2.min = '';
+            } else if (calcType === 'percentIs') {
+                label1.textContent = 'Enter Part:';
+                input1.placeholder = 'e.g., 15';
+                input1.min = '';
+                label2.textContent = 'Enter Whole:';
+                input2.placeholder = 'e.g., 50';
+                input2.min = '0.0001';
+            } else {
+                label1.textContent = 'Enter Initial Value:';
+                input1.placeholder = 'e.g., 40';
+                input1.min = '';
+                label2.textContent = 'Enter Final Value:';
+                input2.placeholder = 'e.g., 50';
+                input2.min = '';
+            }
+
+            input1.value = '';
+            input2.value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function performCalculation() {
+            const calcType = document.getElementById('calcType').value;
+            const input1 = document.getElementById('input1').value.trim();
+            const input2 = document.getElementById('input2').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('tool-error');
+
+            if (!input1 || !input2) {
+                return;
+            }
+
+            try {
+                const num1 = parseFloat(input1);
+                const num2 = parseFloat(input2);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    throw new Error('Please enter valid numbers.');
+                }
+
+                let result;
+                if (calcType === 'percentOf') {
+                    if (num1 < 0 || num2 < 0) {
+                        throw new Error('Negative numbers are not allowed.');
+                    }
+                    result = (num1 / 100) * num2;
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>${num1.toFixed(2)}% of ${num2.toFixed(2)} = ${result.toFixed(2)}</strong></p>
+                    `;
+                } else if (calcType === 'percentIs') {
+                    if (num2 === 0) {
+                        throw new Error('Whole cannot be zero.');
+                    }
+                    if (num1 < 0 || num2 < 0) {
+                        throw new Error('Negative numbers are not allowed.');
+                    }
+                    result = (num1 / num2) * 100;
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>${num1.toFixed(2)} is ${result.toFixed(2)}% of ${num2.toFixed(2)}</strong></p>
+                    `;
+                } else {
+                    if (num1 === 0) {
+                        throw new Error('Initial value cannot be zero.');
+                    }
+                    const change = ((num2 - num1) / Math.abs(num1)) * 100;
+                    const changeType = change >= 0 ? 'increase' : 'decrease';
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>Percentage ${changeType}: ${Math.abs(change).toFixed(2)}%</strong></p>
+                        <p>From ${num1.toFixed(2)} to ${num2.toFixed(2)}</p>
+                    `;
+                }
+                resultDiv.style.display = 'block';
+            } catch (e) {
+                resultDiv.classList.add('tool-error');
+                resultDiv.innerHTML = `<p>Invalid input: ${e.message}</p>`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        document.getElementById('calcType').addEventListener('change', updateInputFields);
+        document.getElementById('calculateButton').addEventListener('click', performCalculation);
+        document.getElementById('calculatorForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            performCalculation();
+        });
+
+        // Initialize input fields based on default mode
+        updateInputFields();
+    </script>
+</body>
+</html>

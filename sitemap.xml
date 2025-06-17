@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://www.toolsyne.com/</loc>
+  </url>
+
+  <!-- Tools -->
+  <url><loc>https://www.toolsyne.com/tools/agecal.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/algebra.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/binaryHexConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/binaryOctalConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/binaryToDecimal.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/BMIcal.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/color-picker.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/decimalToRoman.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/gpaCalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/GradeCalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/hexBinaryConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/hexOctalConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/hexToDecimal.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/investorCalc.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/lcm-gcd-calculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/loan-emi-calculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/matrixCalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/octalBinaryConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/octalHexConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/octalToDecimal.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/percentageCalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/periodicTable.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/physics.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/scientificCalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/unitConverter.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/zodiacsigncalculator.html</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/gradecalculator.html</loc></url>
+
+  <!-- Static Pages -->
+  <url><loc>https://www.toolsyne.com/about.html</loc></url>
+  <url><loc>https://www.toolsyne.com/contact.html</loc></url>
+  <url><loc>https://www.toolsyne.com/disclaimer.html</loc></url>
+  <url><loc>https://www.toolsyne.com/privacy-policy.html</loc></url>
+  <url><loc>https://www.toolsyne.com/terms-and-conditions.html</loc></url>
+
+</urlset>

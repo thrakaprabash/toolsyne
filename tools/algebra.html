@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solve various algebraic equations with Toolsyne's Multi-Formula Algebra Solver. Supports linear, quadratic, and more formulas with step-by-step solutions.">
+    <meta name="keywords" content="algebra solver, equation solver, linear equation, quadratic equation, toolsyne, math solver">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Multi-Formula Algebra Solver">
+    <meta property="og:description" content="Solve algebraic equations easily with Toolsyne's Multi-Formula Algebra Solver. Perfect for students and professionals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/algebra.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Multi-Formula Algebra Solver">
+    <meta name="twitter:description" content="Solve linear, quadratic, and other equations with Toolsyne's Algebra Solver tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Multi-Formula Algebra Solver</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 800px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 200px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .tool-content {
+            flex: 2;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+            display: none;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        select, input[type="number"], input[type="button"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 80%;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .equation-inputs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .equation-inputs div {
+            flex: 1;
+            min-width: 120px;
+            margin-bottom: 10px;
+        }
+        .suggested-tools a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .suggested-tools a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            .tool-container {
+                flex-direction: column;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+            .equation-inputs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Select an equation.</p>
+                    <p>2. Enter required values.</p>
+                    <p>3. Click "Solve Equation".</p>
+                </div>
+                <div class="tool-content">
+                    <h2>Multi-Formula Algebra Solver</h2>
+                    <form id="algebraForm">
+                        <label for="formulaSelect">Choose a formula:</label>
+                        <select id="formulaSelect" onchange="generateInputs()">
+                            <option value="linear1">ax + b = c</option>
+                            <option value="linear2">a(x + b) = c</option>
+                            <option value="quadratic">ax² + bx + c = 0</option>
+                            <option value="division">x / a = b</option>
+                            <option value="squared">x² = a</option>
+                            <option value="linear3">ax - b = c</option>
+                            <option value="division2">a / x = b</option>
+                            <option value="linear4">ax + bx = c</option>
+                            <option value="add">x + a = b</option>
+                            <option value="subtract">x - a = b</option>
+                            <option value="squared2">a * x² = b</option>
+                            <option value="cube">x³ = a</option>
+                            <option value="plusSquared">x² + a = b</option>
+                            <option value="sqrt">√x = a</option>
+                            <option value="product">a * x = b</option>
+                            <option value="modulus">x % a = b</option>
+                        </select>
+                        <div class="equation-inputs" id="inputFields"></div>
+                        <input type="button" value="Solve Equation" onclick="solveEquation()">
+                    </form>
+                    <div id="result" class="tool-result">
+                        <p><strong>Equation:</strong> <span id="equationResult"></span></p>
+                        <p><strong>Solution:</strong> <span id="xResult"></span></p>
+                    </div>
+                    <div class="suggested-tools">
+                        <p>Suggested Tools:</p>
+                        <a href="/tools/agecal.html">Age Calculator</a>
+                        <a href="/tools/BMIcal.html">BMI Calculator</a>
+                        <a href="/tools/scientificCalculator.html">Scientific Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        const formulas = {
+            linear1: ["a", "b", "c"],
+            linear2: ["a", "b", "c"],
+            quadratic: ["a", "b", "c"],
+            division: ["a", "b"],
+            squared: ["a"],
+            linear3: ["a", "b", "c"],
+            division2: ["a", "b"],
+            linear4: ["a", "b", "c"],
+            add: ["a", "b"],
+            subtract: ["a", "b"],
+            squared2: ["a", "b"],
+            cube: ["a"],
+            plusSquared: ["a", "b"],
+            sqrt: ["a"],
+            product: ["a", "b"],
+            modulus: ["a", "b"]
+        };
+
+        function generateInputs() {
+            const formula = document.getElementById("formulaSelect").value;
+            const inputDiv = document.getElementById("inputFields");
+            inputDiv.innerHTML = "";
+            formulas[formula].forEach(v => {
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <label for="${v}">${v}:</label>
+                    <input type="number" id="${v}" step="any" placeholder="Enter ${v}">
+                `;
+                inputDiv.appendChild(div);
+            });
+        }
+
+        function solveEquation() {
+            const formula = document.getElementById("formulaSelect").value;
+            const resultDiv = document.getElementById("result");
+            const eqText = document.getElementById("equationResult");
+            const solText = document.getElementById("xResult");
+
+            resultDiv.style.display = "none";
+            resultDiv.classList.remove("tool-error");
+
+            try {
+                const values = {};
+                formulas[formula].forEach(v => {
+                    const input = document.getElementById(v);
+                    if (!input || input.value.trim() === "") throw "Missing input.";
+                    values[v] = parseFloat(input.value);
+                    if (isNaN(values[v])) throw "Invalid number.";
+                });
+
+                let equation = "", solution = "";
+
+                switch (formula) {
+                    case "linear1":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        solution = ((values.c - values.b) / values.a).toFixed(2);
+                        equation = `${values.a}x + ${values.b} = ${values.c}`;
+                        break;
+                    case "linear2":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        solution = ((values.c / values.a) - values.b).toFixed(2);
+                        equation = `${values.a}(x + ${values.b}) = ${values.c}`;
+                        break;
+                    case "quadratic":
+                        const d = values.b**2 - 4*values.a*values.c;
+                        if (values.a === 0) throw "a cannot be 0.";
+                        if (d < 0) throw "No real roots.";
+                        const r1 = (-values.b + Math.sqrt(d)) / (2 * values.a);
+                        const r2 = (-values.b - Math.sqrt(d)) / (2 * values.a);
+                        solution = r1 === r2 ? `x = ${r1.toFixed(2)}` : `x₁ = ${r1.toFixed(2)}, x₂ = ${r2.toFixed(2)}`;
+                        equation = `${values.a}x² + ${values.b}x + ${values.c} = 0`;
+                        break;
+                    case "division":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        solution = values.a * values.b;
+                        equation = `x / ${values.a} = ${values.b}`;
+                        break;
+                    case "squared":
+                        if (values.a < 0) throw "No real roots.";
+                        solution = `x = ±${Math.sqrt(values.a).toFixed(2)}`;
+                        equation = `x² = ${values.a}`;
+                        break;
+                    case "linear3":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        solution = ((values.c + values.b) / values.a).toFixed(2);
+                        equation = `${values.a}x - ${values.b} = ${values.c}`;
+                        break;
+                    case "division2":
+                        if (values.b === 0) throw "b cannot be 0.";
+                        solution = (values.a / values.b).toFixed(2);
+                        equation = `${values.a} / x = ${values.b}`;
+                        break;
+                    case "linear4":
+                        const sum = values.a + values.b;
+                        if (sum === 0) throw "a + b cannot be 0.";
+                        solution = (values.c / sum).toFixed(2);
+                        equation = `${values.a}x + ${values.b}x = ${values.c}`;
+                        break;
+                    case "add":
+                        solution = (values.b - values.a).toFixed(2);
+                        equation = `x + ${values.a} = ${values.b}`;
+                        break;
+                    case "subtract":
+                        solution = (values.b + values.a).toFixed(2);
+                        equation = `x - ${values.a} = ${values.b}`;
+                        break;
+                    case "squared2":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        if (values.b / values.a < 0) throw "No real roots.";
+                        solution = `x = ±${Math.sqrt(values.b / values.a).toFixed(2)}`;
+                        equation = `${values.a}x² = ${values.b}`;
+                        break;
+                    case "cube":
+                        solution = `x = ${Math.cbrt(values.a).toFixed(2)}`;
+                        equation = `x³ = ${values.a}`;
+                        break;
+                    case "plusSquared":
+                        const xVal = values.b - values.a;
+                        if (xVal < 0) throw "No real roots.";
+                        solution = `x = ±${Math.sqrt(xVal).toFixed(2)}`;
+                        equation = `x² + ${values.a} = ${values.b}`;
+                        break;
+                    case "sqrt":
+                        if (values.a < 0) throw "No real square root.";
+                        solution = `x = ${(values.a ** 2).toFixed(2)}`;
+                        equation = `√x = ${values.a}`;
+                        break;
+                    case "product":
+                        if (values.a === 0) throw "a cannot be 0.";
+                        solution = (values.b / values.a).toFixed(2);
+                        equation = `${values.a} * x = ${values.b}`;
+                        break;
+                    case "modulus":
+                        solution = `x = a * n + ${values.b}, where n ∈ ℤ`;
+                        equation = `x % ${values.a} = ${values.b}`;
+                        break;
+                }
+
+                eqText.innerHTML = `\\(${equation}\\)`;
+                solText.innerHTML = `${solution}`;
+                resultDiv.style.display = "block";
+                MathJax.typesetPromise();
+            } catch (err) {
+                resultDiv.classList.add("tool-error");
+                resultDiv.innerHTML = `<p>Error: ${err}</p>`;
+                resultDiv.style.display = "block";
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", generateInputs);
+    </script>
+</body>
+</html>

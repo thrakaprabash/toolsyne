@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert between Hexadecimal and Octal with Toolsyne's Hexadecimal ⇄ Octal Converter. Quick and accurate conversions for all users.">
+    <meta name="keywords" content="hexadecimal converter, octal converter, toolsyne, hex to octal, octal to hex">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Hexadecimal ⇄ Octal Converter">
+    <meta property="og:description" content="Use Toolsyne's Hexadecimal ⇄ Octal Converter for fast and accurate conversions between hex and octal formats.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/hexOctalConverter.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Hexadecimal ⇄ Octal Converter">
+    <meta name="twitter:description" content="Convert Hexadecimal to Octal or Octal to Hex with Toolsyne's online converter tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Hexadecimal ⇄ Octal Converter</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            flex: 1;
+            min-width: 300px;
+        }
+        .instructions-panel {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .instructions-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .instructions-panel h3 {
+            color: #0077cc;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+        .instructions-panel ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .instructions-panel ol li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+        .instructions-panel ol li:before {
+            
+            color: #0077cc;
+            position: absolute;
+            left: -10px;
+            font-weight: bold;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        select, input[type="text"], input[type="button"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+            transform: scale(1.05);
+        }
+        input[type="button"]:active {
+            transform: scale(0.95);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .suggested-tools {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .suggested-tools h3 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+        .suggested-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+        .suggested-tools li {
+            margin-bottom: 10px;
+        }
+        .suggested-tools a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .suggested-tools a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .tool-wrapper {
+                flex-direction: column;
+            }
+            .instructions-panel {
+                flex: 1 1 100%;
+            }
+            .tool-container {
+                max-width: 100%;
+            }
+            .instructions-panel h3 {
+                font-size: 1.1rem;
+            }
+            .instructions-panel ol {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="instructions-panel">
+                <h3>How to Use Hexadecimal ⇄ Octal Converter</h3>
+                <ol>
+                    <li>Select the conversion type (Hex to Octal or Octal to Hex).</li>
+                    <li>Enter the number in the appropriate format (Hex: 0-9, A-F; Octal: 0-7).</li>
+                    <li>Click 'Convert' to see the result.</li>
+                    <li>Check the result below and use it as needed.</li>
+                </ol>
+            </div>
+            <div class="tool-container">
+                <h2>Hexadecimal ⇄ Octal Converter</h2>
+                <form id="converterForm">
+                    <label for="mode">Select Conversion Type:</label>
+                    <select name="mode" id="mode">
+                        <option value="hexToOct">Hexadecimal to Octal</option>
+                        <option value="octToHex">Octal to Hexadecimal</option>
+                    </select>
+                    <label id="inputLabel">Enter Hexadecimal Number:</label>
+                    <input type="text" id="inputValue" pattern="[0-9A-Fa-f]+" title="Only digits 0-9 and letters A-F (case insensitive) are allowed in hexadecimal numbers." required placeholder="e.g. 1A">
+                    <input type="button" id="convertButton" value="Convert">
+                </form>
+                <div id="result" class="tool-result" style="display: none;"></div>
+            </div>
+            <div class="suggested-tools">
+                <h3>Suggested Tools</h3>
+                <ul>
+                    <li><a href="/tools/gpaCalculator.html">GPA Calculator</a> - Calculate your GPA based on course credits and grades</li>
+                    <li><a href="/tools/hexToDecimal.html">Hexadecimal ⇄ Binary Converter</a> - Convert between Hex and Binary</li>
+                    <li><a href="/tools/GradeCalculator.html">Grade Calculator</a> - Compute your weighted grade</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        function updateInputField() {
+            const mode = document.getElementById('mode').value;
+            const inputField = document.getElementById('inputValue');
+            const inputLabel = document.getElementById('inputLabel');
+
+            if (mode === 'hexToOct') {
+                inputLabel.textContent = 'Enter Hexadecimal Number:';
+                inputField.pattern = '[0-9A-Fa-f]+';
+                inputField.title = 'Only digits 0-9 and letters A-F (case insensitive) are allowed in hexadecimal numbers.';
+                inputField.placeholder = 'e.g. 1A';
+            } else {
+                inputLabel.textContent = 'Enter Octal Number:';
+                inputField.pattern = '[0-7]+';
+                inputField.title = 'Only digits 0 to 7 are allowed in octal numbers.';
+                inputField.placeholder = 'e.g. 32';
+            }
+            inputField.value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function performConversion() {
+            const mode = document.getElementById('mode').value;
+            const inputValue = document.getElementById('inputValue').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('tool-error');
+
+            if (!inputValue) {
+                return;
+            }
+
+            try {
+                if (mode === 'hexToOct') {
+                    if (!inputValue.match(/^[0-9A-Fa-f]+$/)) {
+                        throw new Error('Invalid hexadecimal number');
+                    }
+                    const decimal = parseInt(inputValue, 16);
+                    const octal = decimal.toString(8);
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>Hexadecimal:</strong> ${inputValue.toUpperCase()}</p>
+                        <p><strong>Octal:</strong> ${octal}</p>
+                    `;
+                    resultDiv.style.display = 'block';
+                } else {
+                    if (!inputValue.match(/^[0-7]+$/)) {
+                        throw new Error('Invalid octal number');
+                    }
+                    const decimal = parseInt(inputValue, 8);
+                    const hexadecimal = decimal.toString(16).toUpperCase();
+                    resultDiv.innerHTML = `
+                        <h3>Result:</h3>
+                        <p><strong>Octal:</strong> ${inputValue}</p>
+                        <p><strong>Hexadecimal:</strong> ${hexadecimal}</p>
+                    `;
+                    resultDiv.style.display = 'block';
+                }
+            } catch (e) {
+                resultDiv.classList.add('tool-error');
+                resultDiv.innerHTML = `<p>${e.message}. Please correct your input.</p>`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        document.getElementById('mode').addEventListener('change', updateInputField);
+        document.getElementById('convertButton').addEventListener('click', performConversion);
+        document.getElementById('converterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            performConversion();
+        });
+
+        // Initialize input field based on default mode
+        updateInputField();
+    </script>
+</body>
+</html>

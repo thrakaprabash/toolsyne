@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your Body Mass Index (BMI) with Toolsyne's 100% BMI Calculator. Enter your weight and height to get accurate results.">
+    <meta name="keywords" content="bmi calculator, body mass index, weight calculator, toolsyne, health tool">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - BMI Calculator">
+    <meta property="og:description" content="Use Toolsyne's BMI Calculator to determine your Body Mass Index. Simple and accurate health tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/BMIcal.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - BMI Calculator">
+    <meta name="twitter:description" content="Calculate your BMI easily with Toolsyne's online BMI Calculator tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - BMI Calculator</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 200px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .tool-content {
+            flex: 2;
+            min-width: 0;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        
+        select, input[type="number"], input[type="button"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+        input[type="button"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: auto;
+        }
+        input[type="button"]:hover {
+            background-color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .unit-select {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .unit-select select {
+            width: 100px;
+        }
+        .suggested-tools a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .suggested-tools a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            .tool-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Enter your weight and select the unit (kg or lbs).</p>
+                    <p>2. Enter your height and select the unit (cm or ft/in).</p>
+                    <p>3. Click 'Calculate BMI' to see your results.</p>
+                    <p>4. Ensure all inputs are positive numbers.</p>
+                </div>
+                <div class="tool-content">
+                    <h2>BMI Calculator</h2>
+                    <form id="bmiForm">
+                        <label for="weight">Enter Weight:</label>
+                        <div class="unit-select">
+                            <input type="number" id="weight" required min="1" step="0.1" placeholder="e.g. 70.5">
+                            <select id="weightUnit" onchange="updateInputFields()">
+                                <option value="kg">kg</option>
+                                <option value="lbs">lbs</option>
+                            </select>
+                        </div>
+                        <label for="height">Enter Height:</label>
+                        <div class="unit-select">
+                            <input type="number" id="height" required min="1" step="0.1" placeholder="e.g. 175.5">
+                            <select id="heightUnit" onchange="updateInputFields()">
+                                <option value="cm">cm</option>
+                                <option value="ftin">ft/in</option>
+                            </select>
+                        </div>
+                        <input type="button" id="calculateButton" value="Calculate BMI">
+                    </form>
+                    <div id="result" class="tool-result" style="display: none;"></div>
+                    <div class="suggested-tools">
+                        <p>Suggested Tools:</p>
+                        <a href="/tools/gpaCalculator.html">GPA Calculator</a>
+                        <a href="/tools/GradeCalculator.html">GradeCalculator Solver</a>
+                        <a href="/tools/zodiacsigncalculator.html">Zodiac Sign Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+    <script>
+        function updateInputFields() {
+            const weightUnit = document.getElementById('weightUnit').value;
+            const heightUnit = document.getElementById('heightUnit').value;
+            const weightInput = document.getElementById('weight');
+            const heightInput = document.getElementById('height');
+
+            if (weightUnit === 'kg') {
+                weightInput.placeholder = 'e.g. 70.5';
+                weightInput.step = '0.1';
+            } else {
+                weightInput.placeholder = 'e.g. 155.0';
+                weightInput.step = '0.1';
+            }
+
+            if (heightUnit === 'cm') {
+                heightInput.placeholder = 'e.g. 175.5';
+                heightInput.step = '0.1';
+            } else {
+                heightInput.placeholder = 'e.g. 5.9'; // Approx feet (e.g., 5 ft 9 in)
+                heightInput.step = '0.1';
+            }
+
+            weightInput.value = '';
+            heightInput.value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value.trim());
+            const height = parseFloat(document.getElementById('height').value.trim());
+            const weightUnit = document.getElementById('weightUnit').value;
+            const heightUnit = document.getElementById('heightUnit').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('tool-error');
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                resultDiv.classList.add('tool-error');
+                resultDiv.innerHTML = '<p>Invalid input. Please enter positive numbers.</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            let weightKg = weight;
+            let heightM = height;
+
+            // Convert to metric for calculation
+            if (weightUnit === 'lbs') {
+                weightKg = weight * 0.453592; // lbs to kg
+            }
+            if (heightUnit === 'ftin') {
+                const feet = Math.floor(height);
+                const inches = (height - feet) * 10; // Assuming input as decimal (e.g., 5.9 for 5'9")
+                heightM = (feet * 0.3048) + (inches * 0.0254); // ft + in to meters
+            } else {
+                heightM = height / 100; // cm to meters
+            }
+
+            const bmi = (weightKg / (heightM * heightM)).toFixed(1);
+            let category = '';
+            if (bmi < 18.5) category = 'Underweight';
+            else if (bmi < 25) category = 'Normal weight';
+            else if (bmi < 30) category = 'Overweight';
+            else category = 'Obese';
+
+            resultDiv.innerHTML = `
+                <h3>Result:</h3>
+                <p><strong>Weight:</strong> ${weight} ${weightUnit}</p>
+                <p><strong>Height:</strong> ${height} ${heightUnit === 'ftin' ? 'ft' : 'cm'}</p>
+                <p><strong>BMI:</strong> ${bmi}</p>
+                <p><strong>Category:</strong> ${category}</p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        document.getElementById('calculateButton').addEventListener('click', calculateBMI);
+        document.getElementById('bmiForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            calculateBMI();
+        });
+
+        // Initialize input fields
+        updateInputFields();
+    </script>
+</body>
+</html>

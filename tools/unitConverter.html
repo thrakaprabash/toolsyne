@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert units effortlessly with Toolsyne's Unit Converter, supporting temperature, length, weight, and more with real-time results.">
+    <meta name="keywords" content="unit converter, toolsyne, conversion tool, temperature conversion, length conversion, weight conversion">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Toolsyne - Unit Converter">
+    <meta property="og:description" content="Easily convert between various units including temperature, length, weight, and more with Toolsyne's intuitive Unit Converter.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/unitConverter.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Unit Converter">
+    <meta name="twitter:description" content="A versatile online tool to convert units across multiple categories like temperature, length, and weight.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Unit Converter</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+       
+        
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tool-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .tool-container h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        
+        select, input[type="number"], input[type="submit"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        .tool-result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .tool-result h3 {
+            margin-top: 0;
+        }
+        
+        .how-to-use-under {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .how-to-use-under:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .how-to-use-under h3 {
+            color: #0077cc;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+
+        .how-to-use-under ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .how-to-use-under ol li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .how-to-use-under ol li:before {
+            
+            color: #0077cc;
+            position: absolute;
+            left: -10px;
+            font-weight: bold;
+        }
+
+        .suggested-tools {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .suggested-tools h3 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+
+        .suggested-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .suggested-tools li {
+            margin-bottom: 10px;
+        }
+
+        .suggested-tools a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .suggested-tools a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .tool-container {
+                padding: 15px;
+            }
+            .how-to-use-under, .suggested-tools {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <h2>Unit Converter</h2>
+
+                <form id="unitForm">
+                    <label for="conversionType">Conversion Type:</label>
+                    <select name="type" id="conversionType" required>
+                        <option value="temperature">Temperature</option>
+                        <option value="length">Length/Distance</option>
+                        <option value="weight">Weight/Mass</option>
+                        <option value="area">Area</option>
+                        <option value="volume">Volume</option>
+                        <option value="speed">Speed</option>
+                        <option value="time">Time</option>
+                        <option value="storage">Digital Storage</option>
+                        <option value="energy">Energy</option>
+                        <option value="power">Power</option>
+                        <option value="pressure">Pressure</option>
+                        <option value="angle">Angle</option>
+                        <option value="fuel">Fuel Consumption</option>
+                        <option value="dataRate">Data Transfer Rate</option>
+                        <option value="cooking">Cooking Measurements</option>
+                    </select>
+
+                    <label for="value">Value:</label>
+                    <input type="number" name="value" id="value" step="any" min="0" required>
+
+                    <label for="fromUnit">From:</label>
+                    <select name="fromUnit" id="fromUnit" required>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+
+                    <label for="toUnit">To:</label>
+                    <select name="toUnit" id="toUnit" required>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+
+                    <input type="submit" value="Convert">
+                </form>
+
+                <div class="tool-result" id="resultContainer" style="display: none;">
+                    <h3>Result:</h3>
+                    <p id="resultText"></p>
+                </div>
+            </div>
+        </div>
+        <div class="how-to-use-under">
+            <h3>How to Use This Tool</h3>
+            <ol>
+                <li>Select the type of conversion from the dropdown (e.g., Temperature, Length).</li>
+                <li>Enter the value you want to convert.</li>
+                <li>Choose the unit to convert from and the unit to convert to.</li>
+                <li>Click 'Convert' to see the result.</li>
+                <li>Supported types include temperature, length, weight, and more.</li>
+            </ol>
+        </div>
+        <div class="suggested-tools">
+            <h3>Suggested Tools</h3>
+            <ul>
+                <li><a href="/tools/scientificCalculator.html">Scientific Calculator</a> - Perform advanced calculations</li>
+                <li><a href="/tools/physics.html">Advanced Physics Calculator</a> - Solve physics formulas</li>
+                <li><a href="/tools/matrixCalculator.html">Matrix Calculator</a> - Perform matrix operations</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const conversionType = document.getElementById('conversionType');
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            const form = document.getElementById('unitForm');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultText = document.getElementById('resultText');
+            
+            // Unit definitions
+            const unitDefinitions = {
+                temperature: ["Celsius", "Fahrenheit", "Kelvin"],
+                length: ["mm", "cm", "m", "km", "in", "ft", "yd", "mi", "nmi"],
+                weight: ["mg", "g", "kg", "t", "oz", "lb", "st", "short ton", "long ton"],
+                area: ["mm²", "cm²", "m²", "ha", "km²", "in²", "ft²", "yd²", "ac", "mi²"],
+                volume: ["cm³", "m³", "L", "mL", "in³", "ft³", "gal", "qt", "pt", "fl oz"],
+                speed: ["m/s", "km/h", "mph", "ft/s", "knots"],
+                time: ["ns", "μs", "ms", "s", "min", "hr", "day", "wk", "mo", "yr"],
+                storage: ["b", "B", "KB", "MB", "GB", "TB", "PB"],
+                energy: ["J", "kJ", "cal", "kcal", "Wh", "kWh", "BTU"],
+                power: ["W", "kW", "MW", "hp", "ft-lb/s"],
+                pressure: ["Pa", "kPa", "bar", "atm", "mmHg", "psi"],
+                angle: ["°", "rad", "grad", "'", "\""],
+                fuel: ["mpg", "km/L", "L/100km"],
+                dataRate: ["bps", "kbps", "Mbps", "Gbps", "B/s"],
+                cooking: ["tsp", "tbsp", "fl oz", "c", "pt", "qt", "gal", "mL", "L"]
+            };
+            
+            // Initialize the unit dropdowns
+            updateUnitDropdowns();
+            
+            // When conversion type changes, update the unit dropdowns
+            conversionType.addEventListener('change', updateUnitDropdowns);
+            
+            // Form submission handler
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const value = parseFloat(document.getElementById('value').value);
+                const from = fromUnit.value;
+                const to = toUnit.value;
+                const type = conversionType.value;
+                
+                if (isNaN(value)) {
+                    resultText.innerHTML = '<span style="color:red;">Invalid input value.</span>';
+                    resultContainer.style.display = 'block';
+                    return;
+                }
+                
+                const result = convertUnit(value, from, to, type);
+                resultText.innerHTML = `${value} ${from} = <strong>${result.toFixed(2)} ${to}</strong>`;
+                resultContainer.style.display = 'block';
+            });
+            
+            function updateUnitDropdowns() {
+                const type = conversionType.value;
+                const units = unitDefinitions[type] || unitDefinitions.temperature;
+                
+                // Clear existing options
+                fromUnit.innerHTML = '';
+                toUnit.innerHTML = '';
+                
+                // Add new options
+                units.forEach(unit => {
+                    const option1 = document.createElement('option');
+                    option1.value = unit;
+                    option1.textContent = unit;
+                    fromUnit.appendChild(option1);
+                    
+                    const option2 = document.createElement('option');
+                    option2.value = unit;
+                    option2.textContent = unit;
+                    toUnit.appendChild(option2);
+                });
+                
+                // Set default "to" unit to the second option (if available)
+                if (units.length > 1) {
+                    toUnit.selectedIndex = 1;
+                }
+            }
+            
+            function convertUnit(value, fromUnit, toUnit, type) {
+                // Temperature
+                if (type === "temperature") {
+                    if (fromUnit === "Celsius") {
+                        if (toUnit === "Fahrenheit") return (value * 9 / 5) + 32;
+                        else if (toUnit === "Kelvin") return value + 273.15;
+                        else return value;
+                    } else if (fromUnit === "Fahrenheit") {
+                        if (toUnit === "Celsius") return (value - 32) * 5 / 9;
+                        else if (toUnit === "Kelvin") return ((value - 32) * 5 / 9) + 273.15;
+                        else return value;
+                    } else if (fromUnit === "Kelvin") {
+                        if (toUnit === "Celsius") return value - 273.15;
+                        else if (toUnit === "Fahrenheit") return ((value - 273.15) * 9 / 5) + 32;
+                        else return value;
+                    }
+                }
+
+                // Length (base: cm)
+                else if (type === "length") {
+                    if (fromUnit === "mm") value *= 0.1; // mm to cm
+                    else if (fromUnit === "m") value *= 100; // m to cm
+                    else if (fromUnit === "km") value *= 100000; // km to cm
+                    else if (fromUnit === "in") value *= 2.54; // in to cm
+                    else if (fromUnit === "ft") value *= 30.48; // ft to cm
+                    else if (fromUnit === "yd") value *= 91.44; // yd to cm
+                    else if (fromUnit === "mi") value *= 160934; // mi to cm
+                    else if (fromUnit === "nmi") value *= 185200; // nmi to cm
+
+                    if (toUnit === "cm") return value;
+                    else if (toUnit === "mm") return value / 0.1;
+                    else if (toUnit === "m") return value / 100;
+                    else if (toUnit === "km") return value / 100000;
+                    else if (toUnit === "in") return value / 2.54;
+                    else if (toUnit === "ft") return value / 30.48;
+                    else if (toUnit === "yd") return value / 91.44;
+                    else if (toUnit === "mi") return value / 160934;
+                    else if (toUnit === "nmi") return value / 185200;
+                }
+
+                // Weight (base: g)
+                else if (type === "weight") {
+                    if (fromUnit === "mg") value *= 0.001; // mg to g
+                    else if (fromUnit === "kg") value *= 1000; // kg to g
+                    else if (fromUnit === "t") value *= 1000000; // t to g
+                    else if (fromUnit === "oz") value *= 28.3495; // oz to g
+                    else if (fromUnit === "lb") value *= 453.592; // lb to g
+                    else if (fromUnit === "st") value *= 6350.29; // st to g
+                    else if (fromUnit === "short ton") value *= 907185; // short ton to g
+                    else if (fromUnit === "long ton") value *= 1016047; // long ton to g
+
+                    if (toUnit === "g") return value;
+                    else if (toUnit === "mg") return value / 0.001;
+                    else if (toUnit === "kg") return value / 1000;
+                    else if (toUnit === "t") return value / 1000000;
+                    else if (toUnit === "oz") return value / 28.3495;
+                    else if (toUnit === "lb") return value / 453.592;
+                    else if (toUnit === "st") return value / 6350.29;
+                    else if (toUnit === "short ton") return value / 907185;
+                    else if (toUnit === "long ton") return value / 1016047;
+                }
+
+                // Area (base: cm²)
+                else if (type === "area") {
+                    if (fromUnit === "mm²") value *= 0.01; // mm² to cm²
+                    else if (fromUnit === "m²") value *= 10000; // m² to cm²
+                    else if (fromUnit === "ha") value *= 100000000; // ha to cm²
+                    else if (fromUnit === "km²") value *= 10000000000; // km² to cm²
+                    else if (fromUnit === "in²") value *= 6.4516; // in² to cm²
+                    else if (fromUnit === "ft²") value *= 929.0304; // ft² to cm²
+                    else if (fromUnit === "yd²") value *= 8361.27; // yd² to cm²
+                    else if (fromUnit === "ac") value *= 40468564.86; // ac to cm²
+                    else if (fromUnit === "mi²") value *= 25899881103.36; // mi² to cm²
+
+                    if (toUnit === "cm²") return value;
+                    else if (toUnit === "mm²") return value / 0.01;
+                    else if (toUnit === "m²") return value / 10000;
+                    else if (toUnit === "ha") return value / 100000000;
+                    else if (toUnit === "km²") return value / 10000000000;
+                    else if (toUnit === "in²") return value / 6.4516;
+                    else if (toUnit === "ft²") return value / 929.0304;
+                    else if (toUnit === "yd²") return value / 8361.27;
+                    else if (toUnit === "ac") return value / 40468564.86;
+                    else if (toUnit === "mi²") return value / 25899881103.36;
+                }
+
+                // Volume (base: mL)
+                else if (type === "volume") {
+                    if (fromUnit === "cm³") value *= 1; // cm³ to mL
+                    else if (fromUnit === "m³") value *= 1000000; // m³ to mL
+                    else if (fromUnit === "in³") value *= 16.3871; // in³ to mL
+                    else if (fromUnit === "ft³") value *= 28316.8; // ft³ to mL
+                    else if (fromUnit === "gal") value *= 3785.41; // gal to mL
+                    else if (fromUnit === "qt") value *= 946.353; // qt to mL
+                    else if (fromUnit === "pt") value *= 473.176; // pt to mL
+                    else if (fromUnit === "fl oz") value *= 29.5735; // fl oz to mL
+
+                    if (toUnit === "mL") return value;
+                    else if (toUnit === "cm³") return value / 1;
+                    else if (toUnit === "m³") return value / 1000000;
+                    else if (toUnit === "in³") return value / 16.3871;
+                    else if (toUnit === "ft³") return value / 28316.8;
+                    else if (toUnit === "gal") return value / 3785.41;
+                    else if (toUnit === "qt") return value / 946.353;
+                    else if (toUnit === "pt") return value / 473.176;
+                    else if (toUnit === "fl oz") return value / 29.5735;
+                }
+
+                // Speed (base: km/h)
+                else if (type === "speed") {
+                    if (fromUnit === "m/s") value *= 3.6; // m/s to km/h
+                    else if (fromUnit === "mph") value *= 1.60934; // mph to km/h
+                    else if (fromUnit === "ft/s") value *= 1.09728; // ft/s to km/h
+                    else if (fromUnit === "knots") value *= 1.852; // knots to km/h
+
+                    if (toUnit === "km/h") return value;
+                    else if (toUnit === "m/s") return value / 3.6;
+                    else if (toUnit === "mph") return value / 1.60934;
+                    else if (toUnit === "ft/s") return value / 1.09728;
+                    else if (toUnit === "knots") return value / 1.852;
+                }
+
+                // Time (base: s)
+                else if (type === "time") {
+                    if (fromUnit === "ns") value *= 1e-9; // ns to s
+                    else if (fromUnit === "μs") value *= 1e-6; // μs to s
+                    else if (fromUnit === "ms") value *= 0.001; // ms to s
+                    else if (fromUnit === "min") value *= 60; // min to s
+                    else if (fromUnit === "hr") value *= 3600; // hr to s
+                    else if (fromUnit === "day") value *= 86400; // day to s
+                    else if (fromUnit === "wk") value *= 604800; // wk to s
+                    else if (fromUnit === "mo") value *= 2628000; // mo to s (approx 30.44 days)
+                    else if (fromUnit === "yr") value *= 31536000; // yr to s (365 days)
+
+                    if (toUnit === "s") return value;
+                    else if (toUnit === "ns") return value / 1e-9;
+                    else if (toUnit === "μs") return value / 1e-6;
+                    else if (toUnit === "ms") return value / 0.001;
+                    else if (toUnit === "min") return value / 60;
+                    else if (toUnit === "hr") return value / 3600;
+                    else if (toUnit === "day") return value / 86400;
+                    else if (toUnit === "wk") return value / 604800;
+                    else if (toUnit === "mo") return value / 2628000;
+                    else if (toUnit === "yr") return value / 31536000;
+                }
+
+                // Digital Storage (base: B)
+                else if (type === "storage") {
+                    if (fromUnit === "b") value *= 0.125; // b to B
+                    else if (fromUnit === "KB") value *= 1024; // KB to B
+                    else if (fromUnit === "MB") value *= 1048576; // MB to B
+                    else if (fromUnit === "GB") value *= 1073741824; // GB to B
+                    else if (fromUnit === "TB") value *= 1099511627776; // TB to B
+                    else if (fromUnit === "PB") value *= 1125899906842624; // PB to B
+
+                    if (toUnit === "B") return value;
+                    else if (toUnit === "b") return value / 0.125;
+                    else if (toUnit === "KB") return value / 1024;
+                    else if (toUnit === "MB") return value / 1048576;
+                    else if (toUnit === "GB") return value / 1073741824;
+                    else if (toUnit === "TB") return value / 1099511627776;
+                    else if (toUnit === "PB") return value / 1125899906842624;
+                }
+
+                // Energy (base: J)
+                else if (type === "energy") {
+                    if (fromUnit === "kJ") value *= 1000; // kJ to J
+                    else if (fromUnit === "cal") value *= 4.184; // cal to J
+                    else if (fromUnit === "kcal") value *= 4184; // kcal to J
+                    else if (fromUnit === "Wh") value *= 3600; // Wh to J
+                    else if (fromUnit === "kWh") value *= 3600000; // kWh to J
+                    else if (fromUnit === "BTU") value *= 1055.06; // BTU to J
+
+                    if (toUnit === "J") return value;
+                    else if (toUnit === "kJ") return value / 1000;
+                    else if (toUnit === "cal") return value / 4.184;
+                    else if (toUnit === "kcal") return value / 4184;
+                    else if (toUnit === "Wh") return value / 3600;
+                    else if (toUnit === "kWh") return value / 3600000;
+                    else if (toUnit === "BTU") return value / 1055.06;
+                }
+
+                // Power (base: W)
+                else if (type === "power") {
+                    if (fromUnit === "kW") value *= 1000; // kW to W
+                    else if (fromUnit === "MW") value *= 1000000; // MW to W
+                    else if (fromUnit === "hp") value *= 745.7; // hp to W
+                    else if (fromUnit === "ft-lb/s") value *= 1.35582; // ft-lb/s to W
+
+                    if (toUnit === "W") return value;
+                    else if (toUnit === "kW") return value / 1000;
+                    else if (toUnit === "MW") return value / 1000000;
+                    else if (toUnit === "hp") return value / 745.7;
+                    else if (toUnit === "ft-lb/s") return value / 1.35582;
+                }
+
+                // Pressure (base: Pa)
+                else if (type === "pressure") {
+                    if (fromUnit === "kPa") value *= 1000; // kPa to Pa
+                    else if (fromUnit === "bar") value *= 100000; // bar to Pa
+                    else if (fromUnit === "atm") value *= 101325; // atm to Pa
+                    else if (fromUnit === "mmHg") value *= 133.322; // mmHg to Pa
+                    else if (fromUnit === "psi") value *= 6894.76; // psi to Pa
+
+                    if (toUnit === "Pa") return value;
+                    else if (toUnit === "kPa") return value / 1000;
+                    else if (toUnit === "bar") return value / 100000;
+                    else if (toUnit === "atm") return value / 101325;
+                    else if (toUnit === "mmHg") return value / 133.322;
+                    else if (toUnit === "psi") return value / 6894.76;
+                }
+
+                // Angle (base: °)
+                else if (type === "angle") {
+                    if (fromUnit === "rad") value *= 57.2958; // rad to °
+                    else if (fromUnit === "grad") value *= 0.9; // grad to °
+                    else if (fromUnit === "'") value *= 1/60.0; // arcminute to °
+                    else if (fromUnit === "\"") value *= 1/3600.0; // arcsecond to °
+
+                    if (toUnit === "°") return value;
+                    else if (toUnit === "rad") return value / 57.2958;
+                    else if (toUnit === "grad") return value / 0.9;
+                    else if (toUnit === "'") return value * 60;
+                    else if (toUnit === "\"") return value * 3600;
+                }
+
+                // Fuel Consumption (base: L/100km)
+                else if (type === "fuel") {
+                    if (fromUnit === "mpg") value = 235.215 / value; // mpg to L/100km
+                    else if (fromUnit === "km/L") value = 100 / value; // km/L to L/100km
+
+                    if (toUnit === "L/100km") return value;
+                    else if (toUnit === "mpg") return 235.215 / value;
+                    else if (toUnit === "km/L") return 100 / value;
+                }
+
+                // Data Transfer Rate (base: bps)
+                else if (type === "dataRate") {
+                    if (fromUnit === "kbps") value *= 1000; // kbps to bps
+                    else if (fromUnit === "Mbps") value *= 1000000; // Mbps to bps
+                    else if (fromUnit === "Gbps") value *= 1000000000; // Gbps to bps
+                    else if (fromUnit === "B/s") value *= 8; // B/s to bps
+
+                    if (toUnit === "bps") return value;
+                    else if (toUnit === "kbps") return value / 1000;
+                    else if (toUnit === "Mbps") return value / 1000000;
+                    else if (toUnit === "Gbps") return value / 1000000000;
+                    else if (toUnit === "B/s") return value / 8;
+                }
+
+                // Cooking Measurements (base: mL)
+                else if (type === "cooking") {
+                    if (fromUnit === "tsp") value *= 4.92892; // tsp to mL
+                    else if (fromUnit === "tbsp") value *= 14.7868; // tbsp to mL
+                    else if (fromUnit === "fl oz") value *= 29.5735; // fl oz to mL
+                    else if (fromUnit === "c") value *= 236.588; // c to mL
+                    else if (fromUnit === "pt") value *= 473.176; // pt to mL
+                    else if (fromUnit === "qt") value *= 946.353; // qt to mL
+                    else if (fromUnit === "gal") value *= 3785.41; // gal to mL
+
+                    if (toUnit === "mL") return value;
+                    else if (toUnit === "tsp") return value / 4.92892;
+                    else if (toUnit === "tbsp") return value / 14.7868;
+                    else if (toUnit === "fl oz") return value / 29.5735;
+                    else if (toUnit === "c") return value / 236.588;
+                    else if (toUnit === "pt") return value / 473.176;
+                    else if (toUnit === "qt") return value / 946.353;
+                    else if (toUnit === "gal") return value / 3785.41;
+                }
+
+                return value; // Default case if no conversion applies
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your weighted grade with Toolsyne's Grade Calculator. Enter assignment details to determine your current grade and required scores.">
+    <meta name="keywords" content="grade calculator, weighted grade, toolsyne, student tools, calculate grade">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Grade Calculator">
+    <meta property="og:description" content="Use Toolsyne's Grade Calculator to compute your weighted grade and determine required scores for your desired course grade.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/GradeCalculator.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Grade Calculator">
+    <meta name="twitter:description" content="Calculate your weighted grade with Toolsyne's online Grade Calculator tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Grade Calculator</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.5">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            flex: 1;
+            min-width: 300px;
+        }
+        .instructions-panel {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .instructions-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .instructions-panel h3 {
+            color: #0077cc;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+        .instructions-panel ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .instructions-panel ol li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+        .instructions-panel ol li:before {
+            
+            color: #0077cc;
+            position: absolute;
+            left: -10px;
+            font-weight: bold;
+        }
+        .assignment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .assignment-table th, .assignment-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .table-input {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        .suggested-tools {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .suggested-tools h3 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+        .suggested-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+        .suggested-tools li {
+            margin-bottom: 10px;
+        }
+        .suggested-tools a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .suggested-tools a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        /* Button Styles */
+        input[type="button"] {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #setAssignments {
+            background-color: #4CAF50; /* Green for Set Assignments */
+            color: white;
+        }
+        #setAssignments:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        #setAssignments:active {
+            transform: scale(0.95);
+        }
+        #calculate {
+            background-color: #2196F3; /* Blue for Calculate Grade */
+            color: white;
+        }
+        #calculate:hover {
+            background-color: #1e88e5;
+            transform: scale(1.05);
+        }
+        #calculate:active {
+            transform: scale(0.95);
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .tool-wrapper {
+                flex-direction: column;
+            }
+            .instructions-panel {
+                flex: 1 1 100%;
+            }
+            .tool-container {
+                max-width: 100%;
+            }
+            .instructions-panel h3 {
+                font-size: 1.1rem;
+            }
+            .instructions-panel ol {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="instructions-panel">
+                <h3>How to Use Grade Calculator</h3>
+                <ol>
+                    <li>Select the number of graded assignments (1-10).</li>
+                    <li>Enter your desired course grade (0-100).</li>
+                    <li>Click 'Set Assignments' to adjust the number of rows.</li>
+                    <li>Fill in the weight (as a percentage) and grade (numeric or letter) for each assignment.</li>
+                    <li>Click 'Calculate Grade' to see your current grade and required score for your desired grade.</li>
+                </ol>
+            </div>
+            <div class="tool-container">
+                <h2>Weighted Grade Calculator</h2>
+                <form id="gradeForm">
+                    <label for="assignmentCount">Number of Graded Assignments (1–10):</label>
+                    <input type="number" name="assignmentCount" id="assignmentCount" min="1" max="10" value="1" required>
+                    <label for="desiredGrade">Desired Course Grade (0-100):</label>
+                    <input type="number" name="desiredGrade" id="desiredGrade" step="any" min="0" max="100" placeholder="e.g., 85">
+                    <br><br>
+                    <input type="button" id="setAssignments" value="Set Assignments">
+                    <input type="button" id="calculate" value="Calculate Grade">
+                    <h3>Enter Assignment Details</h3>
+                    <table class="assignment-table">
+                        <thead>
+                            <tr>
+                                <th>Assignment</th>
+                                <th>Weight (%)</th>
+                                <th>Grade (Numeric or Letter)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignmentTableBody">
+                            <tr>
+                                <td>Assignment 1</td>
+                                <td><input class="table-input" type="text" name="weight0" required></td>
+                                <td><input class="table-input" type="text" name="grade0" pattern="([0-9]{1,3}(\.[0-9]*)?|[ABCDF][+-]?)" title="Enter a number (0-100) or letter grade (e.g., A, B+, C)" required></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="result" class="tool-result" style="display: none;"></div>
+                </form>
+            </div>
+            <div class="suggested-tools">
+                <h3>Suggested Tools</h3>
+                <ul>
+                    <li><a href="/tools/gpaCalculator.html">GPA Calculator</a> - Calculate your GPA based on course credits and grades</li>
+                    <li><a href="/tools/agecal.html">Age Calculator</a> - Calculate your age with precision</li>
+                    <li><a href="/tools/algebra.html">Algebra Solver</a> - Solve algebraic equations easily</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        const gradeMap = {
+            'A': 95.0, 'A+': 97.0, 'A-': 92.0,
+            'B+': 87.0, 'B': 85.0, 'B-': 82.0,
+            'C+': 77.0, 'C': 75.0, 'C-': 72.0,
+            'D+': 67.0, 'D': 65.0, 'D-': 62.0,
+            'F': 0.0
+        };
+
+        function updateAssignmentRows() {
+            const assignmentCount = parseInt(document.getElementById('assignmentCount').value) || 1;
+            const tableBody = document.getElementById('assignmentTableBody');
+            tableBody.innerHTML = '';
+
+            for (let i = 0; i < assignmentCount; i++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>Assignment ${i + 1}</td>
+                    <td><input class="table-input" type="text" name="weight${i}" required></td>
+                    <td><input class="table-input" type="text" name="grade${i}" pattern="([0-9]{1,3}(\.[0-9]*)?|[ABCDF][+-]?)" title="Enter a number (0-100) or letter grade (e.g., A, B+, C)" required></td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+
+        function validateAndCalculate() {
+            const assignmentCount = parseInt(document.getElementById('assignmentCount').value) || 1;
+            const desiredGrade = parseFloat(document.getElementById('desiredGrade').value) || -1;
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('tool-error');
+
+            const weights = [];
+            const grades = [];
+            let weightedTotal = 0.0;
+            let weightSum = 0.0;
+            let validInput = true;
+
+            for (let i = 0; i < assignmentCount; i++) {
+                const weightInput = document.querySelector(`input[name="weight${i}"]`).value;
+                const gradeInput = document.querySelector(`input[name="grade${i}"]`).value;
+
+                if (!weightInput || !gradeInput) {
+                    validInput = false;
+                    break;
+                }
+
+                const weight = parseFloat(weightInput);
+                let grade;
+
+                if (gradeInput.match(/^[0-9]{1,3}(\.[0-9]*)?$/)) {
+                    grade = parseFloat(gradeInput);
+                    if (grade < 0 || grade > 100) {
+                        validInput = false;
+                        break;
+                    }
+                } else if (gradeInput.match(/^[ABCDF][+-]?$/i)) {
+                    grade = gradeMap[gradeInput.toUpperCase()];
+                    if (grade === undefined) {
+                        validInput = false;
+                        break;
+                    }
+                } else {
+                    validInput = false;
+                    break;
+                }
+
+                if (weight <= 0 || weight > 100) {
+                    validInput = false;
+                    break;
+                }
+
+                weights.push(weight);
+                grades.push(grade);
+                weightedTotal += weight * grade;
+                weightSum += weight;
+            }
+
+            if (validInput && weightSum > 0) {
+                const currentGrade = weightedTotal / weightSum;
+                resultDiv.innerHTML = `<h3>Current Course Grade: ${currentGrade.toFixed(2)}%</h3>`;
+
+                if (desiredGrade >= 0 && desiredGrade <= 100 && weightSum < 100) {
+                    const remainingWeight = 100 - weightSum;
+                    const requiredGrade = ((desiredGrade - currentGrade) * 100) / remainingWeight;
+
+                    if (requiredGrade <= 100 && requiredGrade >= 0) {
+                        resultDiv.innerHTML += `
+                            <h3>Required Grade for Remaining ${remainingWeight.toFixed(2)}%</h3>
+                            <p>To achieve a course grade of ${desiredGrade.toFixed(2)}%, you need ${requiredGrade.toFixed(2)}% on the remaining assignments.</p>
+                        `;
+                    } else {
+                        resultDiv.classList.add('tool-error');
+                        resultDiv.innerHTML += `
+                            <p>Impossible to achieve ${desiredGrade.toFixed(2)}% with the remaining ${remainingWeight.toFixed(2)}%. Required grade: ${requiredGrade.toFixed(2)}%.</p>
+                        `;
+                    }
+                } else if (desiredGrade >= 0 && desiredGrade <= 100 && weightSum >= 100) {
+                    resultDiv.innerHTML += `<p>No remaining assignments to calculate required grade.</p>`;
+                }
+                resultDiv.style.display = 'block';
+            } else if (!validInput) {
+                resultDiv.classList.add('tool-error');
+                resultDiv.innerHTML = `<p>Invalid input: Ensure all fields are filled, weights are between 0.01 and 100, and grades are valid (0-100 or A, B+, etc.).</p>`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        document.getElementById('setAssignments').addEventListener('click', updateAssignmentRows);
+        document.getElementById('calculate').addEventListener('click', validateAndCalculate);
+        document.getElementById('assignmentCount').addEventListener('change', updateAssignmentRows);
+
+        // Initialize with one row
+        updateAssignmentRows();
+    </script>
+</body>
+</html>

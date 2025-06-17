@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert between Decimal and Roman numerals easily with Toolsyne's Decimal ⇄ Roman Converter. Free and accurate online tool.">
+    <meta name="keywords" content="decimal to roman, roman to decimal, converter, toolsyne, numeral conversion">
+    <meta name="author" content="Toolsyne">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Toolsyne - Decimal ⇄ Roman Converter">
+    <meta property="og:description" content="Use Toolsyne's Decimal ⇄ Roman Converter to switch between decimal and Roman numerals effortlessly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toolsyne.com/tools/decimalToRoman.html">
+    <meta property="og:image" content="/assets/images/banner.png">
+    <meta property="og:site_name" content="Toolsyne">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolsyne - Decimal ⇄ Roman Converter">
+    <meta name="twitter:description" content="Convert Decimal to Roman or Roman to Decimal with Toolsyne's online converter tool.">
+    <meta name="twitter:image" content="/assets/images/banner.png">
+    <title>Toolsyne - Decimal ⇄ Roman Converter</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.4">
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
+    <style>
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tool-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .tool-container {
+            margin: 0 auto;
+            max-width: 600px;
+            display: flex;
+            gap: 20px;
+        }
+        .instructions {
+            flex: 1;
+            max-width: 200px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .tool-content {
+            flex: 2;
+            min-width: 0;
+        }
+        .tool-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e0f7fa;
+            border-radius: 5px;
+        }
+        .tool-error {
+            background: #ffebee;
+        }
+        select, input[type="number"], input[type="text"], input[type="submit"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #2196F3;
+            color: white;
+            cursor: pointer;
+            width: auto;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .suggested-tools a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .suggested-tools a:hover {
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 480px) {
+            .tool-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .instructions {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="60">
+        <a href="/index.html"><h2 style="color:white">Toolsyne</h2></a>
+        <nav class="header-nav">
+            <a href="/index.html">More Tools</a>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="tool-wrapper">
+            <div class="tool-container">
+                <div class="instructions">
+                    <h3>How to Use</h3>
+                    <p>1. Select the conversion type (Decimal to Roman or Roman to Decimal).</p>
+                    <p>2. Enter the number or numeral in the input field.</p>
+                    <p>3. Click 'Convert' to see the result.</p>
+                    <p>4. Ensure input follows the specified format.</p>
+                </div>
+                <div class="tool-content">
+                    <h2>Decimal ⇄ Roman Numeral Converter</h2>
+
+                    <form id="converterForm" onsubmit="event.preventDefault(); convert();">
+                        <label for="mode">Select Conversion Type:</label>
+                        <select id="mode" onchange="updateForm()">
+                            <option value="decToRoman">Decimal to Roman</option>
+                            <option value="romanToDec">Roman to Decimal</option>
+                        </select>
+
+                        <div id="inputField"></div>
+
+                        <input type="submit" value="Convert">
+                    </form>
+
+                    <div id="result"></div>
+                    <div class="suggested-tools">
+                        <p>Suggested Tools:</p>
+                        <a href="/tools/percentageCalculator.html">Percentage Calculator</a>
+                        <a href="/tools/loan-emi-calculator.html">Loan Emi Calculator</a>
+                        <a href="/tools/BMIcal.html">BMI Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Toolsyne. All rights reserved.
+        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
+        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
+        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
+    </div>
+
+    <script>
+        function updateForm() {
+            const mode = document.getElementById("mode").value;
+            const inputField = document.getElementById("inputField");
+            document.getElementById("result").innerHTML = "";
+
+            if (mode === "decToRoman") {
+                inputField.innerHTML = `
+                    <label for="decimal">Enter Decimal Number (1 - 3999):</label>
+                    <input type="number" id="decimal" min="1" max="3999" required placeholder="e.g. 1994">
+                `;
+            } else {
+                inputField.innerHTML = `
+                    <label for="roman">Enter Roman Numeral (uppercase):</label>
+                    <input type="text" id="roman" pattern="^[MDCLXVI]+$" required placeholder="e.g. MCMXCIV" title="Only uppercase Roman letters (MDCLXVI)">
+                `;
+            }
+        }
+
+        function convert() {
+            const mode = document.getElementById("mode").value;
+            const resultDiv = document.getElementById("result");
+            let resultHTML = "";
+
+            if (mode === "decToRoman") {
+                const decimal = parseInt(document.getElementById("decimal").value.trim());
+                if (isNaN(decimal) || decimal < 1 || decimal > 3999) {
+                    resultHTML = `<div class="tool-result tool-error"><p>Enter a valid decimal number between 1 and 3999.</p></div>`;
+                } else {
+                    const romans = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"];
+                    const values = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+                    let roman = "";
+                    let remaining = decimal;
+                    for (let i = 0; i < values.length; i++) {
+                        while (remaining >= values[i]) {
+                            roman += romans[i];
+                            remaining -= values[i];
+                        }
+                    }
+                    resultHTML = `
+                        <div class="tool-result">
+                            <h3>Result:</h3>
+                            <p><strong>Decimal:</strong> ${decimal}</p>
+                            <p><strong>Roman Numeral:</strong> ${roman}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                const roman = document.getElementById("roman").value.trim().toUpperCase();
+                if (!/^[MDCLXVI]+$/.test(roman)) {
+                    resultHTML = `<div class="tool-result tool-error"><p>Invalid Roman numeral. Use only uppercase letters M, D, C, L, X, V, I.</p></div>`;
+                } else {
+                    const values = {
+                        'I': 1, 'V': 5, 'X': 10, 'L': 50,
+                        'C': 100, 'D': 500, 'M': 1000
+                    };
+                    let total = 0;
+                    let prev = 0;
+                    for (let i = roman.length - 1; i >= 0; i--) {
+                        const curr = values[roman[i]];
+                        if (curr < prev) {
+                            total -= curr;
+                        } else {
+                            total += curr;
+                        }
+                        prev = curr;
+                    }
+                    resultHTML = `
+                        <div class="tool-result">
+                            <h3>Result:</h3>
+                            <p><strong>Roman Numeral:</strong> ${roman}</p>
+                            <p><strong>Decimal:</strong> ${total}</p>
+                        </div>
+                    `;
+                }
+            }
+
+            resultDiv.innerHTML = resultHTML;
+        }
+
+        window.onload = updateForm;
+    </script>
+</body>
+</html>
