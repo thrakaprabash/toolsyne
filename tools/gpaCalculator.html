@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Calculate GPA or convert CGPA with Toolsyne's GPA Calculator.">
   <meta name="twitter:image" content="/assets/images/banner.png">
   <title>Toolsyne - GPA Calculator</title>
-  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.5">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.6">
   <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5T1XL6QP"></script>
@@ -46,6 +46,7 @@
       padding: 15px;
       max-width: 1200px;
       margin: 0 auto;
+      margin-bottom: 60px; /* Ensure content doesn't overlap sticky footer */
     }
 
     /* Header Styles */
@@ -70,7 +71,7 @@
 
     .header-nav {
       margin-left: auto;
-      display: none; /* Hidden by default on mobile */
+      display: none;
       flex-direction: column;
       position: absolute;
       top: 60px;
@@ -171,6 +172,15 @@
       margin-top: 0;
       color: #0077cc;
       font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .gpa-instructions-content {
+      display: none;
+    }
+
+    .gpa-instructions-content.active {
+      display: block;
     }
 
     /* Tab Styles */
@@ -384,6 +394,14 @@
         padding: 15px;
         font-size: 1rem;
       }
+
+      .gpa-instructions h3 {
+        cursor: default;
+      }
+
+      .gpa-instructions-content {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -433,15 +451,17 @@
         <div id="gpa-calculator" class="tab-content active">
           <h2>GPA Calculator</h2>
           <div class="gpa-instructions">
-            <h3>How to Use GPA Calculator</h3>
-            <ol>
-              <li>Select number of courses</li>
-              <li>Enter course name (optional)</li>
-              <li>Enter credit hours</li>
-              <li>Enter grade (letter or %)</li>
-              <li>Click "Calculate GPA"</li>
-              <li>Use CGPA converter tab for conversions</li>
-            </ol>
+            <h3 onclick="toggleGPAInstructions()">How to Use GPA Calculator</h3>
+            <div class="gpa-instructions-content">
+              <ol>
+                <li>Select number of courses</li>
+                <li>Enter course name (optional)</li>
+                <li>Enter credit hours</li>
+                <li>Enter grade (letter or %)</li>
+                <li>Click "Calculate GPA"</li>
+                <li>Use CGPA converter tab for conversions</li>
+              </ol>
+            </div>
           </div>
           <form id="gpaForm" onsubmit="calculateGPA(event)">
             <div class="form-group">
@@ -508,6 +528,12 @@
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       renderCourseInputs();
+      // Initialize GPA instructions as collapsed on mobile
+      if (window.innerWidth < 768) {
+        document.querySelector('.gpa-instructions-content').classList.remove('active');
+      } else {
+        document.querySelector('.gpa-instructions-content').classList.add('active');
+      }
     });
 
     function toggleMenu() {
@@ -517,6 +543,13 @@
 
     function toggleInstructions() {
       const content = document.querySelector('.instructions-content');
+      if (window.innerWidth < 768) {
+        content.classList.toggle('active');
+      }
+    }
+
+    function toggleGPAInstructions() {
+      const content = document.querySelector('.gpa-instructions-content');
       if (window.innerWidth < 768) {
         content.classList.toggle('active');
       }
