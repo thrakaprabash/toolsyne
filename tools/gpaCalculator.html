@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Calculate your GPA or convert CGPA with Toolsyne's GPA Calculator. Free tool for students to manage grades accurately.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate your GPA or convert CGPA with Toolsyne's GPA Calculator. Free tool for students.">
   <meta name="keywords" content="gpa calculator, cgpa converter, grade calculator, toolsyne, student tools">
   <meta name="author" content="Toolsyne">
   <meta name="robots" content="index, follow">
-  <!-- Open Graph Meta Tags for Social Media -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Toolsyne - GPA Calculator">
-  <meta property="og:description" content="Use Toolsyne's GPA Calculator to compute your GPA or convert CGPA effortlessly. Ideal for academic planning.">
+  <meta property="og:description" content="Use Toolsyne's GPA Calculator to compute GPA or convert CGPA effortlessly.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.toolsyne.com/tools/gpaCalculator.html">
   <meta property="og:image" content="/assets/images/banner.png">
@@ -17,10 +17,10 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Toolsyne - GPA Calculator">
-  <meta name="twitter:description" content="Calculate GPA or convert CGPA with Toolsyne's online GPA Calculator tool.">
+  <meta name="twitter:description" content="Calculate GPA or convert CGPA with Toolsyne's GPA Calculator.">
   <meta name="twitter:image" content="/assets/images/banner.png">
   <title>Toolsyne - GPA Calculator</title>
-  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.3">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=1.5">
   <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5T1XL6QP"></script>
@@ -31,37 +31,103 @@
     gtag('config', 'G-ZK5T1XL6QP');
   </script>
   <style>
-    /* Base Styles - Optimized for Mobile */
-    * {
-      box-sizing: border-box;
-    }
-    
+    /* Base Styles */
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f5f7fa;
       color: #333;
       line-height: 1.6;
-      -webkit-text-size-adjust: 100%;
-      -webkit-tap-highlight-color: transparent;
+      font-size: 16px;
     }
 
     .content {
       padding: 15px;
-      max-width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    
+    /* Header Styles */
+    .header {
+      background-color: #0077cc;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-    
+    .header img {
+      height: 40px;
+    }
 
-    /* Tool Layout - Stacked for Mobile */
+    .header h2 {
+      color: white;
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .header-nav {
+      margin-left: auto;
+      display: none; /* Hidden by default on mobile */
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 15px;
+      background-color: #0077cc;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .header-nav.active {
+      display: flex;
+    }
+
+    .header-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .header-nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hamburger {
+      display: block;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #0077cc;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    /* Tool Layout */
     .tool-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
       margin-top: 15px;
     }
 
@@ -69,22 +135,50 @@
       background-color: white;
       border-radius: 8px;
       padding: 15px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      order: 2; /* Move instructions below on mobile */
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .instructions-panel h3 {
+      margin: 0;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #0077cc;
+    }
+
+    .instructions-content {
+      display: none;
+    }
+
+    .instructions-content.active {
+      display: block;
+      margin-top: 10px;
     }
 
     .tool-main {
-      width: 100%;
+      min-width: 100%;
     }
 
-    /* Tab Styles - Full Width on Mobile */
+    /* Instructions under GPA Calculator */
+    .gpa-instructions {
+      background-color: #f0f8ff;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .gpa-instructions h3 {
+      margin-top: 0;
+      color: #0077cc;
+      font-size: 1rem;
+    }
+
+    /* Tab Styles */
     .tab-container {
       display: flex;
       border-bottom: 1px solid #ddd;
       margin-bottom: 15px;
-      width: 100%;
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .tab {
@@ -94,10 +188,11 @@
       border: 1px solid #ddd;
       border-bottom: none;
       border-radius: 5px 5px 0 0;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      font-size: 0.95rem;
       white-space: nowrap;
-      flex-shrink: 0;
+      flex: 1;
+      text-align: center;
+      touch-action: manipulation;
     }
 
     .tab:hover {
@@ -115,52 +210,56 @@
       display: none;
       background-color: white;
       padding: 15px;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      width: 100%;
+      border-radius: 0 8px 8px 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .tab-content.active {
       display: block;
     }
 
-    /* Form Styles - Optimized for Touch */
+    /* Form Styles */
     .form-group {
       margin-bottom: 15px;
     }
 
     label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 0.95rem;
     }
 
     input, select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 16px;
-      -webkit-appearance: none;
-      appearance: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      min-height: 44px;
+    }
+
+    input[type="number"] {
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
     }
 
     button {
       background-color: #0077cc;
       color: white;
       border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
+      padding: 10px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
+      font-size: 1rem;
       width: 100%;
-      margin: 5px 0;
+      min-height: 44px;
       touch-action: manipulation;
     }
 
-    button:hover, button:active {
+    button:hover {
       background-color: #005fa3;
     }
 
@@ -169,9 +268,6 @@
       flex-direction: column;
       gap: 10px;
       margin-bottom: 15px;
-      padding: 10px;
-      background-color: #f8fafc;
-      border-radius: 6px;
     }
 
     .action-buttons {
@@ -183,12 +279,12 @@
 
     .result-box {
       margin-top: 15px;
-      padding: 12px;
+      padding: 10px;
       background-color: #f0f8ff;
       border-left: 4px solid #0077cc;
       border-radius: 4px;
       display: none;
-      font-size: 16px;
+      font-size: 0.95rem;
     }
 
     /* Additional Links */
@@ -197,19 +293,18 @@
       background-color: white;
       padding: 15px;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .additional-tools h3 {
       margin-top: 0;
       color: #0077cc;
-      font-size: 18px;
+      font-size: 1.1rem;
     }
 
     .additional-tools ul {
       list-style: none;
       padding: 0;
-      margin: 0;
     }
 
     .additional-tools li {
@@ -219,62 +314,86 @@
     .additional-tools a {
       color: #0077cc;
       text-decoration: none;
-      transition: color 0.3s;
-      display: block;
-      padding: 8px 0;
+      font-size: 0.95rem;
     }
 
-    /* Responsive Adjustments for Larger Screens */
+    .additional-tools a:hover {
+      color: #005fa3;
+      text-decoration: underline;
+    }
+
+    /* Responsive Adjustments */
     @media (min-width: 768px) {
-      .content {
-        padding: 20px;
-      }
-      
       .tool-wrapper {
         flex-direction: row;
+        gap: 30px;
       }
-      
+
       .instructions-panel {
         flex: 0 0 250px;
-        order: 1;
       }
-      
+
+      .instructions-panel h3 {
+        cursor: default;
+      }
+
+      .instructions-content {
+        display: block;
+      }
+
       .tool-main {
         flex: 1;
       }
-      
+
       .course-row {
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 15px;
       }
-      
-      .course-row > div {
-        flex: 1 1 200px;
-      }
-      
+
       .action-buttons {
         flex-direction: row;
       }
-      
+
+      .header-nav {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        background-color: transparent;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .header-nav a {
+        padding: 8px 12px;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
       button {
         width: auto;
       }
-    }
 
-    /* Input Zoom Prevention on iOS */
-    @media screen and (-webkit-min-device-pixel-ratio:0) {
-      select,
-      textarea,
-      input {
-        font-size: 16px !important;
+      input, select {
+        width: 80%;
+      }
+
+      .gpa-instructions {
+        padding: 15px;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="50">
-    <a href="/index.html"><h2 style="color: white;">Toolsyne</h2></a>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="/assets/images/logo.png" alt="Toolsyne Logo" height="40">
+      <a href="/index.html"><h2>Toolsyne</h2></a>
+    </div>
+    <span class="hamburger" onclick="toggleMenu()">☰</span>
     <nav class="header-nav">
       <a href="/index.html">More Tools</a>
       <a href="/about.html">About Us</a>
@@ -285,30 +404,23 @@
   <div class="content">
     <div class="tool-wrapper">
       <div class="instructions-panel">
-        <h3>How to Use GPA Calculator</h3>
-        <ol>
-          <li>Select the number of courses</li>
-          <li>Enter course details</li>
-          <li>Enter credit hours</li>
-          <li>Enter your grade</li>
-          <li>Click "Calculate GPA"</li>
-        </ol>
-        
-        <h3>Grading Scale</h3>
-        <ul style="columns: 2; column-gap: 15px;">
-          <li>A+ = 4.0</li>
-          <li>A = 4.0</li>
-          <li>A- = 3.7</li>
-          <li>B+ = 3.3</li>
-          <li>B = 3.0</li>
-          <li>B- = 2.7</li>
-          <li>C+ = 2.3</li>
-          <li>C = 2.0</li>
-          <li>C- = 1.7</li>
-          <li>D+ = 1.3</li>
-          <li>D = 1.0</li>
-          <li>F = 0.0</li>
-        </ul>
+        <h3 onclick="toggleInstructions()">Grading Scale Reference</h3>
+        <div class="instructions-content">
+          <ul>
+            <li>A+ (97-100%) = 4.0</li>
+            <li>A (93-96%) = 4.0</li>
+            <li>A- (90-92%) = 3.7</li>
+            <li>B+ (87-89%) = 3.3</li>
+            <li>B (83-86%) = 3.0</li>
+            <li>B- (80-82%) = 2.7</li>
+            <li>C+ (77-79%) = 2.3</li>
+            <li>C (73-76%) = 2.0</li>
+            <li>C- (70-72%) = 1.7</li>
+            <li>D+ (67-69%) = 1.3</li>
+            <li>D (60-66%) = 1.0</li>
+            <li>F (<60%) = 0.0</li>
+          </ul>
+        </div>
       </div>
       
       <div class="tool-main">
@@ -319,54 +431,62 @@
 
         <!-- GPA Calculator -->
         <div id="gpa-calculator" class="tab-content active">
-          <h2 style="margin-top: 0;">GPA Calculator</h2>
+          <h2>GPA Calculator</h2>
+          <div class="gpa-instructions">
+            <h3>How to Use GPA Calculator</h3>
+            <ol>
+              <li>Select number of courses</li>
+              <li>Enter course name (optional)</li>
+              <li>Enter credit hours</li>
+              <li>Enter grade (letter or %)</li>
+              <li>Click "Calculate GPA"</li>
+              <li>Use CGPA converter tab for conversions</li>
+            </ol>
+          </div>
           <form id="gpaForm" onsubmit="calculateGPA(event)">
             <div class="form-group">
               <label for="courseCount">Number of Courses:</label>
-              <div style="display: flex; gap: 10px; align-items: center;">
-                <input type="number" id="courseCount" min="1" max="10" value="3" style="flex: 1;">
-                <button type="button" onclick="renderCourseInputs()" style="padding: 10px;">Set</button>
+              <div style="display: flex; gap: 10px;">
+                <input type="number" id="courseCount" min="1" max="10" value="3" inputmode="numeric">
+                <button type="button" onclick="renderCourseInputs()">Set</button>
               </div>
             </div>
-            
             <div id="courseInputs"></div>
-            
             <div class="action-buttons">
               <button type="button" onclick="addMoreCourses()">Add Course</button>
               <button type="submit">Calculate GPA</button>
             </div>
-            
             <div id="gpaResult" class="result-box"></div>
           </form>
         </div>
 
         <!-- CGPA Converter -->
         <div id="cgpa-converter" class="tab-content">
-          <h2 style="margin-top: 0;">CGPA Converter</h2>
+          <h2>CGPA Converter</h2>
           <div class="form-group">
             <label>Convert CGPA to GPA:</label>
-            <input type="number" id="cgpaInput" step="0.01" min="0" placeholder="Enter CGPA">
-            <select id="cgpaScale" style="margin-top: 10px;">
-              <option value="4">Out of 4</option>
-              <option value="5">Out of 5</option>
-              <option value="10">Out of 10</option>
-            </select>
-            <button onclick="convertToGPA()" style="margin-top: 10px;">Convert</button>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <input type="number" id="cgpaInput" step="0.01" min="0" placeholder="Enter CGPA" inputmode="decimal">
+              <select id="cgpaScale">
+                <option value="4">Out of 4</option>
+                <option value="5">Out of 5</option>
+                <option value="10">Out of 10</option>
+              </select>
+              <button onclick="convertToGPA()">Convert</button>
+            </div>
             <div id="gpaConvertedResult" class="result-box"></div>
           </div>
-          
-          <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
-          
+          <hr>
           <div class="form-group">
-            <label>Calculate CGPA from GPA values:</label>
-            <input type="text" id="gpaList" placeholder="e.g. 3.5, 3.7, 4.0">
+            <label>Calculate CGPA from GPA:</label>
+            <input type="text" id="gpaList" placeholder="GPAs (e.g., 3.5, 3.7, 4.0)">
             <button onclick="convertToCGPA()" style="margin-top: 10px;">Calculate CGPA</button>
             <div id="cgpaResult" class="result-box"></div>
           </div>
         </div>
         
         <div class="additional-tools">
-          <h3>More Useful Tools</h3>
+          <h3>More Tools</h3>
           <ul>
             <li><a href="/tools/matrixCalculator.html">Matrix Calculator</a></li>
             <li><a href="/tools/periodicTable.html">Periodic Table</a></li>
@@ -378,44 +498,41 @@
   </div>
 
   <div class="footer">
-        <p>© 2025 Toolsyne. All rights reserved.
-        <a href="/terms-and-conditions.html" style="color: #f9f9f9;">Terms & Conditions</a> | 
-        <a href="/privacy-policy.html" style="color: #f9f9f9;">Privacy Policy</a> | 
-        <a href="/disclaimer.html" style="color: #f9f9f9;">Disclaimer</a></p>
-    </div>
+    <p>© 2025 Toolsyne. All rights reserved.<br>
+    <a href="/privacy.html">Privacy</a> | 
+    <a href="/terms.html">Terms</a> | 
+    <a href="/contact.html">Contact</a></p>
+  </div>
 
   <script>
-    // Initialize the calculator when page loads
+    // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       renderCourseInputs();
-      
-      // Prevent form submission on Enter key in input fields
-      document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-          }
-        });
-      });
     });
+
+    function toggleMenu() {
+      const nav = document.querySelector('.header-nav');
+      nav.classList.toggle('active');
+    }
+
+    function toggleInstructions() {
+      const content = document.querySelector('.instructions-content');
+      if (window.innerWidth < 768) {
+        content.classList.toggle('active');
+      }
+    }
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       event.currentTarget.classList.add('active');
-      
-      // Scroll to top of tab content on mobile
-      if (window.innerWidth < 768) {
-        document.getElementById(tabId).scrollIntoView({behavior: 'smooth', block: 'start'});
-      }
     }
 
     function renderCourseInputs() {
       const count = parseInt(document.getElementById('courseCount').value);
       const container = document.getElementById('courseInputs');
       container.innerHTML = '';
-      
       for (let i = 0; i < count; i++) {
         container.innerHTML += `
           <div class="course-row">
@@ -425,7 +542,7 @@
             </div>
             <div>
               <label>Credit Hours:</label>
-              <input type="number" name="credit${i}" step="0.1" min="0.5" max="10" value="3" required>
+              <input type="number" name="credit${i}" step="0.1" min="0.5" max="10" value="3" inputmode="decimal" required>
             </div>
             <div>
               <label>Grade:</label>
@@ -433,12 +550,6 @@
             </div>
           </div>
         `;
-      }
-      
-      // Focus on first input if on mobile
-      if (window.innerWidth < 768 && count > 0) {
-        const firstInput = document.querySelector('[name="courseName0"]');
-        if (firstInput) firstInput.focus();
       }
     }
 
@@ -456,7 +567,6 @@
       for (let i = 0; i < count; i++) {
         const credit = parseFloat(document.querySelector(`[name='credit${i}']`).value);
         const gradeStr = document.querySelector(`[name='grade${i}']`).value.trim().toUpperCase();
-
         let gradePoint = 0;
         if (!isNaN(parseFloat(gradeStr))) {
           const numeric = parseFloat(gradeStr);
@@ -477,13 +587,8 @@
         }
 
         if (credit < 0.5 || credit > 10 || gradePoint < 0) {
-          document.getElementById('gpaResult').innerHTML = "Invalid input in course " + (i + 1);
+          document.getElementById('gpaResult').innerHTML = `Invalid input in course ${i + 1}`;
           document.getElementById('gpaResult').style.display = "block";
-          
-          // Scroll to error message on mobile
-          if (window.innerWidth < 768) {
-            document.getElementById('gpaResult').scrollIntoView({behavior: 'smooth', block: 'center'});
-          }
           return;
         }
 
@@ -492,14 +597,8 @@
       }
 
       const gpa = totalPoints / totalCredits;
-      const resultBox = document.getElementById('gpaResult');
-      resultBox.innerHTML = `Your GPA is: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
-      resultBox.style.display = "block";
-      
-      // Scroll to result on mobile
-      if (window.innerWidth < 768) {
-        resultBox.scrollIntoView({behavior: 'smooth', block: 'center'});
-      }
+      document.getElementById('gpaResult').innerHTML = `Your GPA: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
+      document.getElementById('gpaResult').style.display = "block";
     }
 
     function convertToGPA() {
@@ -508,28 +607,15 @@
       const cgpa = parseFloat(cgpaInput.value);
       const result = document.getElementById('gpaConvertedResult');
 
-      if (isNaN(cgpa) ){
-        result.innerHTML = "Please enter a valid number";
+      if (isNaN(cgpa) || cgpa < 0 || cgpa > scale) {
+        result.innerHTML = "Enter a valid CGPA (0 to scale)";
         result.style.display = "block";
-        cgpaInput.focus();
-        return;
-      }
-      
-      if (cgpa < 0 || cgpa > scale) {
-        result.innerHTML = `Please enter a value between 0 and ${scale}`;
-        result.style.display = "block";
-        cgpaInput.focus();
         return;
       }
 
       const gpa = (cgpa / scale) * 4;
-      result.innerHTML = `Converted GPA: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
+      result.innerHTML = `GPA: <strong>${gpa.toFixed(2)} / 4.0</strong>`;
       result.style.display = "block";
-      
-      // Scroll to result on mobile
-      if (window.innerWidth < 768) {
-        result.scrollIntoView({behavior: 'smooth', block: 'center'});
-      }
     }
 
     function convertToCGPA() {
@@ -537,29 +623,16 @@
       const gpas = input.split(',').map(g => parseFloat(g.trim()));
       const result = document.getElementById('cgpaResult');
 
-      if (gpas.length === 0 || gpas.some(isNaN)) {
-        result.innerHTML = "Please enter valid numbers separated by commas";
+      if (gpas.length === 0 || gpas.some(g => isNaN(g) || g < 0 || g > 4)) {
+        result.innerHTML = "Enter valid GPAs (0-4.0) with commas";
         result.style.display = "block";
-        document.getElementById('gpaList').focus();
-        return;
-      }
-      
-      if (gpas.some(g => g < 0 || g > 4)) {
-        result.innerHTML = "All values must be between 0 and 4.0";
-        result.style.display = "block";
-        document.getElementById('gpaList').focus();
         return;
       }
 
       const sum = gpas.reduce((a, b) => a + b, 0);
       const avg = sum / gpas.length;
-      result.innerHTML = `Calculated CGPA: <strong>${avg.toFixed(2)} / 4.0</strong>`;
+      result.innerHTML = `CGPA: <strong>${avg.toFixed(2)} / 4.0</strong>`;
       result.style.display = "block";
-      
-      // Scroll to result on mobile
-      if (window.innerWidth < 768) {
-        result.scrollIntoView({behavior: 'smooth', block: 'center'});
-      }
     }
 
     function addMoreCourses() {
@@ -567,16 +640,6 @@
       if (count < 10) {
         document.getElementById('courseCount').value = count + 1;
         renderCourseInputs();
-        
-        // Scroll to new course input on mobile
-        if (window.innerWidth < 768) {
-          const newInput = document.querySelector(`[name="courseName${count}"]`);
-          if (newInput) {
-            setTimeout(() => {
-              newInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-            }, 100);
-          }
-        }
       } else {
         alert('Maximum 10 courses allowed.');
       }
