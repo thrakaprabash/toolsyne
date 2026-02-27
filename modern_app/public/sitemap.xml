@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://www.toolsyne.com/</loc>
+  </url>
+
+  <!-- Static Pages -->
+  <url><loc>https://www.toolsyne.com/about</loc></url>
+  <url><loc>https://www.toolsyne.com/contact</loc></url>
+  <url><loc>https://www.toolsyne.com/terms</loc></url>
+  <url><loc>https://www.toolsyne.com/privacy</loc></url>
+  <url><loc>https://www.toolsyne.com/disclaimer</loc></url>
+
+  <!-- Tools -->
+  <url><loc>https://www.toolsyne.com/tools/bmi-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/grade-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/gpa-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/percentage-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/scientific-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/age-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/zodiac-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/loan-emi-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/investor-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/base-converter</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/unit-converter</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/algebra-solver</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/color-picker</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/roman-converter</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/lcm-gcd-calculator</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/periodic-table</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/physics-solver</loc></url>
+  <url><loc>https://www.toolsyne.com/tools/matrix-calculator</loc></url>
+
+</urlset>
